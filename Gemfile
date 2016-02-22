@@ -11,6 +11,8 @@ gem 'turbolinks', '5.0.0.beta1'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'devise', github: 'plataformatec/devise', branch: 'master'
+
 group :production do
   gem 'pg'
 end

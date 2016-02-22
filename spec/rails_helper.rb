@@ -15,7 +15,6 @@ require 'database_cleaner'
 
 Capybara.javascript_driver = :webkit
 
-
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -23,7 +22,6 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = false
-
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
