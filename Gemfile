@@ -39,5 +39,6 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
   gem 'factory_girl_rails', '~> 4.4.1'
 end
