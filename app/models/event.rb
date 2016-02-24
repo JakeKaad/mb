@@ -10,5 +10,5 @@ class Event < ActiveRecord::Base
   ### Validations
   ####################################
 
-  validates_presence_of :name, :event_hall, :start_time
+  validates_presence_of :name, :event_hall, :start_time, :company_id
 end

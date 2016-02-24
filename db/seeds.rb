@@ -8,4 +8,8 @@
 
 user = User.first_or_create email: "test@test.com", password: "password", first_name: "Test", last_name: "User"
 company = Company.first_or_create name: "MB"
+n = 1
+15.times do
+  company.events.create start_time: n.weeks.from_now, name: "event #{n}", event_hall: ["LB", "GB"].sample
+end
 company.users << user
