@@ -1,15 +1,14 @@
-class Company < ActiveRecord::Base
+class Event < ActiveRecord::Base
 
   ####################################
   ### Relations
   ####################################
 
-  has_many :users
-  has_many :events
+  belongs_to :company
 
   ####################################
   ### Validations
   ####################################
 
-  validates_presence_of :name
+  validates_presence_of :name, :event_hall, :start_time
 end
