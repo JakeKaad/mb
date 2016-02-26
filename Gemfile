@@ -11,6 +11,11 @@ gem 'turbolinks', '5.0.0.beta1'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# For docx processing/storage
+gem 'docx', '~> 0.2.07', :require => ["docx"]
+gem 'aws-sdk', '~> 2'
+gem 'paperclip'
+
 gem 'devise', github: 'plataformatec/devise', branch: 'master'
 
 group :production do
@@ -26,6 +31,7 @@ group :development, :test do
   gem "rspec-support", git: "https://github.com/rspec/rspec-support.git", branch: "master"
   gem "rspec-expectations", git: "https://github.com/rspec/rspec-expectations.git", branch: "master"
   gem "rspec-mocks", git: "https://github.com/rspec/rspec-mocks.git", branch: "master"
+  gem 'dotenv-rails'
 end
 
 group :development do
