@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
-  before_action :set_company, only: [:new, :create, :show]
+  before_action :set_company, only: [:new, :create, :show, :download]
+  before_action :set_document, only: [:show, :download]
 
   def new
     @document = Document.new
@@ -17,8 +18,12 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    @document = Document.find params[:id]
-    send_data Paperclip.io_adapters.for(@document.file).read
+    # send_data Paperclip.io_adapters.for(@document.file).read
+  end
+
+  def download
+    send_file(Paperclip.io_adapters.for(@document.file).path, type: @document.file_content_type, disposition: "attachment", filename: @document.file_name)
+    render :show
   end
 
 
@@ -26,6 +31,10 @@ class DocumentsController < ApplicationController
 
   def document_params
     params.require(:document).permit(:file, :title, :description)
+  end
+
+  def set_document
+    @document = Document.find params[:id]
   end
 
   def set_company
