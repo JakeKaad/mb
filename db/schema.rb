@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160227054243) do
 
   create_table "documents", force: :cascade do |t|
     t.string   "title"
-    t.text     "descriptions"
+    t.text     "description"
     t.integer  "company_id"
     t.integer  "event_id"
     t.datetime "created_at"

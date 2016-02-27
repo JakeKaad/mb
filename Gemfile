@@ -13,7 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # For docx processing/storage
 gem 'docx', '~> 0.2.07', :require => ["docx"]
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 
 gem 'devise', github: 'plataformatec/devise', branch: 'master'
