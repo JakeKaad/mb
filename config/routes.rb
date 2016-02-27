@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root to: 'users#current_user_home'
 
   resources :companies, only: [:new, :show] do
-    resources :documents, only: [:new, :create]
+    resources :documents, only: [:new, :create, :show]
   end
 end

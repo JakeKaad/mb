@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_company, only: [:new, :create]
+  before_action :set_company, only: [:new, :create, :show]
 
   def new
     @document = Document.new
@@ -16,10 +16,20 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def show
+    @document = Document.find params[:id]
+    send_data Paperclip.io_adapters.for(@document.file).read
+  end
+
+
   private
 
   def document_params
     params.require(:document).permit(:file, :title, :description)
+  end
+
+  def set_company
+    @company = Company.find params[:company_id]
   end
 
   def set_company
