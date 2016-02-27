@@ -16,4 +16,8 @@ class Event < ActiveRecord::Base
   def event_date
     start_time.strftime("%A, %B %d %Y")
   end
+
+  def hall
+    event_hall
+  end
 end
