@@ -9,6 +9,7 @@ describe Company do
 
   it { should have_many :users }
   it { should have_many :events }
+  it { should have_many :documents }
 
   ####################################
   ### Validations

@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   ####################################
 
   belongs_to :company
+  has_many :documents
 
   ####################################
   ### Validations

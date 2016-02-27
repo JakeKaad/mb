@@ -6,6 +6,7 @@ describe Event do
   ####################################
 
   it { should belong_to :company }
+  it { should have_many :documents }
 
   ####################################
   ### Validations

@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224162323) do
+ActiveRecord::Schema.define(version: 20160227054243) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "title"
+    t.text     "descriptions"
+    t.integer  "company_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "events", force: :cascade do |t|
