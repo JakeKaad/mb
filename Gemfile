@@ -38,6 +38,7 @@ group :development, :test do
   gem "rspec-expectations", git: "https://github.com/rspec/rspec-expectations.git", branch: "master"
   gem "rspec-mocks", git: "https://github.com/rspec/rspec-mocks.git", branch: "master"
   gem 'dotenv-rails'
+  gem 'faker'
 end
 
 group :development do

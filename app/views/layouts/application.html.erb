@@ -10,8 +10,8 @@
 
 <div class="container">
   <%= render "layouts/navbar" %>
-  <%= flash[:alert] %>
-  <%= flash[:notice] %>
+  <%= render "layouts/flash" %>
+
   <%= yield %>
 </div>
 </body>
