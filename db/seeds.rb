@@ -10,7 +10,7 @@ user = User.first_or_create email: "test@test.com", password: "password", first_
 company = Company.first_or_create name: "Melody Ballroom"
 n = 1
 15.times do
-  company.events.create start_time: n.weeks.from_now, name: event_names.sample, event_hall: ["Lower Ballroom", "Grand Ballroom"].sample
+  company.events.create date: n.weeks.from_now, start_time: n.weeks.from_now, name: event_names.sample, event_hall: ["Lower Ballroom", "Grand Ballroom"].sample
   n += 1
 end
 

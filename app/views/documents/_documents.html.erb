@@ -1,0 +1,5 @@
+<div>
+  <% documents.each do |document| %>
+    <%= link_to "Document", company_document_path(@company, document) %>
+  <% end %>
+</div>

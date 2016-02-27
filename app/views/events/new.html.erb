@@ -1,0 +1,28 @@
+<h1> Add new event </h1>
+<%= render 'layouts/company_pills', company: @company %>
+
+<div class="container">
+  <%= form_for([@company, @event]) do |f| %>
+    <fieldset class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.label :event_hall %>
+      <%= f.select :event_hall, ["Grand Ballroom", "Lower Ballroom"], class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.label :start_time%>
+      <%= f.time_field :start_time, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.label :date %>
+      <%= f.date_field :date, class: "form-control" %>
+    </fieldset>
+
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

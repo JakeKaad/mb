@@ -1,0 +1,11 @@
+<% events.each do |event| %>
+  <div class="col-md-6">
+    <div class="card card-block">
+      <h4 class="card-title">
+        <%= link_to event.name, company_event_path(@company, event) %>
+      </h4>
+      <p><%= event.event_hall %></p>
+      <p><%= event.event_date %></p>
+    </div>
+  </div>
+<% end %>

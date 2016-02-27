@@ -1,21 +1,6 @@
-<%= @company.name %>
-
-<%= link_to "Upload new document", new_company_document_path(@company) %>
-<br>
-<% @company.documents.each do |document| %>
-  <%= link_to "Document", company_document_path(@company, document) %>
-<% end %>
+<h1> <%= @company.name%> Dashboard</h1>
+<%= render 'layouts/company_pills', company: @company %>
 
 
-
-<% @events.each do |event| %>
-  <div class="col-md-5">
-    <div class="card card-block">
-      <h4 class="card-title">
-        <%= link_to event.name, company_event_path(@company, event) %>
-      </h4>
-      <p><%= event.event_hall %></p>
-      <p><%= event.event_date %></p>
-    </div>
-  </div>
-<% end %>
+<%= render 'events/events', events: @events unless params[:tab] %>
+<%= render 'documents/documents', documents: @company.documents if params[:tab] == "docs" %>

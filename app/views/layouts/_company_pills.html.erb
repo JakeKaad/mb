@@ -1,0 +1,11 @@
+<nav class="nav nav-pills ">
+  <li class="nav-item">
+    <%= link_to "Events", company, class: "nav-link #{"active" unless params[:tab]}" %>
+  </li>\
+  <li class="nav-item">
+    <%= link_to "Add event", new_company_event_path(company, tab: "new-event"), class: "nav-link #{"active" if params[:tab] == "new-event"}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Documents", company_path(company, tab: "docs"), class: "nav-link #{"active" if params[:tab] == "docs"}" %>
+  </li>
+</nav>
