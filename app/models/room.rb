@@ -1,24 +1,15 @@
-class Company < ActiveRecord::Base
+class Room < ActiveRecord::Base
 
   ####################################
   ### Relations
   ####################################
 
-  has_many :users
+  belongs_to :company
   has_many :events
-  has_many :documents
-  has_many :rooms
 
   ####################################
   ### Validations
   ####################################
 
-  validates_presence_of :name
-
-
-  def rooms_for_select
-    rooms.map do |room|
-      [room.name, room.id]
-    end
-  end
+  validates_presence_of :company_id, :name, :max_occupancy
 end

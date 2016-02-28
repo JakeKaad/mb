@@ -6,12 +6,13 @@ class Event < ActiveRecord::Base
 
   belongs_to :company
   has_many :documents
+  belongs_to :room
 
   ####################################
   ### Validations
   ####################################
 
-  validates_presence_of :name, :event_hall, :start_time, :company_id, :date
+  validates_presence_of :name, :room_id, :start_time, :company_id, :date
 
   ####################################
   ### Enum

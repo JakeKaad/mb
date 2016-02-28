@@ -9,8 +9,8 @@
     </fieldset>
 
     <fieldset class="form-group">
-      <%= f.label :event_hall %>
-      <%= f.select :event_hall, ["Grand Ballroom", "Lower Ballroom"], class: "form-control" %>
+      <%= f.label :room_id, "Room" %>
+      <%= f.collection_select(:room_id, @company.rooms, :id, :name) %>
     </fieldset>
 
     <fieldset class="form-group">

@@ -11,7 +11,7 @@ class EventsController < ApplicationController
 
   def create
     @event = @company.events.new(event_params)
-  
+
     if @event.save
       redirect_to @company, notice: "Event added"
     else
@@ -27,6 +27,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:date, :name, :start_time, :event_hall)
+    params.require(:event).permit(:date, :name, :start_time, :room_id)
   end
 end
