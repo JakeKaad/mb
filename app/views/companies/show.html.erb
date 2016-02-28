@@ -1,5 +1,4 @@
-<h1> <%= @company.name%> Dashboard</h1>
-<%= render 'layouts/company_pills', company: @company %>
+<%= render 'companies/header', company: @company, title: "#{@company.name} Dashboard" %>
 
 
 <%= render 'events/events', events: @events unless params[:tab] %>

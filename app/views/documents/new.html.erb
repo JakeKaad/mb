@@ -1,6 +1,7 @@
-<%= form_for [@company, @document] do |f| %>
+<%= render 'companies/header', company: @company, title: "Add new document" %>
 
-  <%= render 'layouts/errors', object: @event %>
+<%= form_for [@company, @document] do |f| %>
+  <%= render 'layouts/errors', object: @document %>
   <fieldset class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: "form-control" %>

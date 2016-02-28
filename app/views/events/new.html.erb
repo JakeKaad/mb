@@ -1,5 +1,4 @@
-<h1> Add new event </h1>
-<%= render 'layouts/company_pills', company: @company %>
+<%= render 'companies/header', company: @company, title: "Add new event" %>
 
 <div class="container">
   <%= form_for([@company, @event]) do |f| %>

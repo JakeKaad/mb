@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'users#current_user_home'
 
   resources :companies, only: [:new, :show] do
-    resources :documents, only: [:new, :create, :show] do
+    resources :documents, only: [:new, :create, :show, :index] do
       member do
         get :download
       end
