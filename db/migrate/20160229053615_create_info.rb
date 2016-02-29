@@ -10,6 +10,8 @@ class CreateInfo < ActiveRecord::Migration[5.0]
       t.integer :final_guest_count
       t.integer :number_of_tables
       t.integer :guests_per_table
+      t.integer :event_id
+      t.timestamps
     end
   end
 end

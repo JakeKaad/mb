@@ -27,13 +27,10 @@ feature "Interacting with the company dashboard" do
     fill_in "Name", with: event_params[:name]
     select room.name, from: "Room"
     fill_in "Start time", with: "02:30 PM"
-    fill_in "Date", with: "12/31/2016"
+    fill_in "event_date", with: "2016-12-12"
 
     click_on "Create event"
-    save_and_open_page
     expect(page).to have_content "Event added"
     expect(page).to have_content event_params[:name]
   end
 end
-
- 

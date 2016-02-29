@@ -9,6 +9,12 @@ class Event < ActiveRecord::Base
   belongs_to :room
 
   ####################################
+  ### Event-information Relations
+  ####################################
+
+  has_one :info
+
+  ####################################
   ### Validations
   ####################################
 

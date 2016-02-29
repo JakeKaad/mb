@@ -21,6 +21,24 @@ describe EventsController do
       it "should assign @events" do
         expect(assigns(:event)).to eq event
       end
+
+      context "with no info created" do
+        it "should assign @info as a new record if it doesn't exist" do
+          expect(assigns(:info).new_record?).to be_truthy
+        end
+
+        it "should render the new_info form" do
+
+        end
+      end
+
+      context "with info created" do
+        let!(:info) { create :info, event: event}
+        it "should assign @info as the event's info record if it does exist" do
+          get :show, company_id: company.id, id: event.id
+          expect(assigns(:info)).to eq info.reload
+        end
+      end
     end
   end
 
@@ -65,8 +83,8 @@ describe EventsController do
           expect(company.events.count).to eq 1
         end
 
-        it "should redirect to the company show page" do
-          expect(response).to redirect_to company_path(company)
+        it "should redirect to the event show page" do
+          expect(response).to redirect_to company_event_path(company, Event.first)
         end
 
         it "should render a flash notice" do
