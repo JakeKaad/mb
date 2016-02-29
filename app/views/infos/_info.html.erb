@@ -1,0 +1,9 @@
+<div class="col-md-5">
+  <div class="card card-block">
+    <% if @info.new_record? %>
+      <h3 class="card-title"> Add event information</h3>
+      <%= render "infos/form", event: @event, info: @info %>
+    <% else %>
+    <% end %>
+  </div>
+</div>

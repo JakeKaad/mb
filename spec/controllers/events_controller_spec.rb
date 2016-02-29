@@ -26,10 +26,6 @@ describe EventsController do
         it "should assign @info as a new record if it doesn't exist" do
           expect(assigns(:info).new_record?).to be_truthy
         end
-
-        it "should render the new_info form" do
-
-        end
       end
 
       context "with info created" do

@@ -1,0 +1,56 @@
+
+<%= form_for [event, info] do |f| %>
+  <%= render 'layouts/errors', object: info %>
+
+  <fieldset class="form-group">
+    <%= f.label :linen_colors %>
+    <%= f.text_field :linen_colors, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :napkin_colors %>
+    <%= f.text_field :napkin_colors, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :napkin_fold %>
+    <%= f.text_field :napkin_fold, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :placesetting %>
+    <%= f.text_field :placesetting, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :centerpieces %>
+    <%= f.text_field :centerpieces, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :water_service %>
+    <%= f.text_field :water_service, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :coffee_service %>
+    <%= f.text_field :coffee_service, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :final_guest_count %>
+    <%= f.text_field :final_guest_count, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :number_of_tables %>
+    <%= f.text_field :number_of_tables, class: "form-control" %>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <%= f.label :guests_per_table %>
+    <%= f.text_field :guests_per_table, class: "form-control" %>
+  </fieldset>
+
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

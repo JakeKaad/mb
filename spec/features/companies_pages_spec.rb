@@ -30,7 +30,7 @@ feature "Interacting with the company dashboard" do
     fill_in "event_date", with: "2016-12-12"
 
     click_on "Create event"
-    expect(page).to have_content "Event added"
+    expect(page).to have_content "Event was added succesfully."
     expect(page).to have_content event_params[:name]
   end
 end

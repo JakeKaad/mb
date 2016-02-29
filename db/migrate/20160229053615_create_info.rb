@@ -6,7 +6,8 @@ class CreateInfo < ActiveRecord::Migration[5.0]
       t.string :napkin_fold
       t.string :placesetting
       t.text :centerpieces
-      t.string :water_or_coffee
+      t.string :water_service
+      t.string :coffee_service
       t.integer :final_guest_count
       t.integer :number_of_tables
       t.integer :guests_per_table
