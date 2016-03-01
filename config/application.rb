@@ -27,5 +27,7 @@ module Mb
     config.autoload_paths += %W(
       app/models/event_meta
     )
+
+    config.autoload_paths << Rails.root.join("lib")
   end
 end

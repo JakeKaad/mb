@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  include EventHandler
+
   before_action :set_company
 
   def show
@@ -29,29 +31,5 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:date, :name, :start_time, :room_id)
-  end
-
-  def handle event
-    EventHandler.new event
-  end
-
-  class EventHandler
-    attr_reader :info
-    attr_accessor :event
-
-    def initialize(event)
-      @event = event
-      find_info event
-    end
-
-    private
-
-    def find_info event
-      if event.info.present?
-        @info = event.info
-      else
-        @info = Info.new event: event
-      end
-    end
   end
 end
