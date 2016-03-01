@@ -5,7 +5,6 @@ class NotesController < ApplicationController
   def create
     note = Note.new(note_params)
     notable = set_notable
-
     if note.save
       notable.notes << note
       flash[:notice] = "Note saved."
