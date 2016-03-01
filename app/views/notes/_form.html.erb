@@ -1,0 +1,8 @@
+<%= form_for [notable, Note.new], class: "form-inline" do |f| %>
+  <div class="form-group">
+    <%= f.label :message %>
+    <%= f.text_area :message, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Add note", class: "btn btn-sm btn-success" %>
+<% end %>
