@@ -1,4 +1,5 @@
 class DocumentsController < ApplicationController
+  before_action :require_sign_in
   before_action :set_company, only: [:new, :create, :show, :index, :download]
   before_action :set_document, only: [:show, :download]
 

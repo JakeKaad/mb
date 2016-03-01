@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 feature "Company and meta information" do
+  include FeatureMacros
+
   let(:user) { create :user }
   let(:company) { user.company }
   let!(:event_without_info) { create :event, company: company }
   let!(:event_with_info) { create :event_with_info, company: company }
+
+  before { login user }
 
   scenario "event without info should display the info form" do
     visit company_event_path company, event_without_info
@@ -21,7 +25,7 @@ feature "Company and meta information" do
     visit company_event_path company, event_without_info
     fill_in_info_params
     click_on "Create info"
-    expect(page).to have_content "Information added to event"
+    expect(page).to have_content "Information added to #{event_without_info.name}"
   end
 end
 
