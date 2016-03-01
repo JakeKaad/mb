@@ -27,6 +27,15 @@ feature "Company and meta information" do
     click_on "Create info"
     expect(page).to have_content "Information added to #{event_without_info.name}"
   end
+
+  scenario "it saves info properties" do
+    visit company_event_path company, event_without_info
+    info = build :info
+    fill_in_info_params info
+    click_on "Create info"
+
+    expect(event_without_info.info.linen_colors).to eq info.linen_colors
+  end
 end
 
 def fill_in_info_params info=nil

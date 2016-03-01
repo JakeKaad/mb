@@ -35,6 +35,11 @@ describe InfosController do
       it "fills the flash notice" do
         expect(flash[:notice]).to_not be_empty
       end
+
+      it "assigns info properties" do
+        info = event.info
+        info.napkin_colors = info_params["napkin_colors"]
+      end
     end
   end
 end

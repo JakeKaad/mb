@@ -3,8 +3,9 @@ class InfosController < ApplicationController
   before_action :set_event
 
   def create
-    info = Info.new(event: @event)
-    if info.save(info_params)
+    info = Info.new(info_params)
+    info.event = @event
+    if info.save
       redirect_to company_event_path(@event.company, @event), notice: "Information added to #{@event.name}."
     else
       handle @event
