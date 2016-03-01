@@ -19,6 +19,13 @@
       <li class="list-group-item"><h2>Notes</h2></li>
     </div>
 
+    <% info.notes.each do |note| %>
+    <div class="row">
+      <li class="list-group-item">
+        <%= note.message %>
+      </li>
+    </div>
+    <% end %>
     <%= render "notes/form", notable: info %>
 
 </ul>
