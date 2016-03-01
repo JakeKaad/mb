@@ -14,11 +14,8 @@ module EventHandler
       private
 
       def find_info event
-        if event.info.present?
-          @info = event.info
-        else
-          @info = Info.new event: event
-        end
+        @info = event.info
+        @info ||= Info.new event: event
       end
     end
   end
