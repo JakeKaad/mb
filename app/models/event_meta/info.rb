@@ -5,6 +5,7 @@ class Info < ActiveRecord::Base
   ####################################
 
   belongs_to :event
+  has_many :notes, as: :notable
 
   ####################################
   ### Validations
