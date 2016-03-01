@@ -4,5 +4,7 @@
     <%= f.text_area :message, class: "form-control" %>
   </div>
 
+  <%= f.hidden_field :event_id, value: notable.event.id %>
+
   <%= f.submit "Add note", class: "btn btn-sm btn-success" %>
 <% end %>

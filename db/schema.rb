@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 20160301143404) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.text     "message"
+    t.text     "message",      null: false
     t.string   "notable_type"
     t.integer  "notable_id"
-    t.integer  "event_id"
+    t.integer  "event_id",     null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

@@ -12,4 +12,6 @@ class Note < ActiveRecord::Base
     ### Validations
     ####################################
 
+    validates_presence_of :event_id
+    validates_presence_of :message
 end
