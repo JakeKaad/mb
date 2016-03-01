@@ -5,8 +5,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find params[:id]
-    event_meta = handle @event
-    @info = event_meta.info
+    handle @event
   end
 
   def new

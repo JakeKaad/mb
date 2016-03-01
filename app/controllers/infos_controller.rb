@@ -7,6 +7,7 @@ class InfosController < ApplicationController
     if info.save(info_params)
       redirect_to company_event_path(@event.company, @event), notice: "Information added to #{@event.name}."
     else
+      handle @event
       render 'events/show', alert: "Something went wrong."
     end
   end

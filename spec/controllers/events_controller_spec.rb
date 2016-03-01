@@ -22,9 +22,13 @@ describe EventsController do
         expect(assigns(:event)).to eq event
       end
 
+      it "should assign @event_details" do
+        expect(assigns(:event_details)).to_not be_nil
+      end
+
       context "with no info created" do
         it "should assign @info as a new record if it doesn't exist" do
-          expect(assigns(:info).new_record?).to be_truthy
+          expect(assigns(:event_details).info.new_record?).to be_truthy
         end
       end
 
@@ -32,7 +36,7 @@ describe EventsController do
         let!(:info) { create :info, event: event}
         it "should assign @info as the event's info record if it does exist" do
           get :show, company_id: company.id, id: event.id
-          expect(assigns(:info)).to eq info.reload
+          expect(assigns(:event_details).info).to eq info.reload
         end
       end
     end

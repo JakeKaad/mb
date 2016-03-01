@@ -3,15 +3,18 @@ module EventHandler
 
   included do
     class EventHandler
-      attr_reader :info
       attr_accessor :event
 
       def initialize(event)
         @event = event
-        find_info event
+      end
+
+      def info
+        @info ||= find_info event
       end
 
       private
+
 
       def find_info event
         @info = event.info
@@ -21,6 +24,6 @@ module EventHandler
   end
 
   def handle event
-    EventHandler.new event
+    @event_details ||= EventHandler.new event
   end
 end

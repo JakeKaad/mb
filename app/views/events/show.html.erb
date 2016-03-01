@@ -3,4 +3,4 @@
 <h5> <%= @event.hall %> </h5>
 <h5> <%= @event.event_date %> </h5>
 
-<%= render @info %>
+<%= render 'infos/info', event: @event, info: @event_details.info %>
