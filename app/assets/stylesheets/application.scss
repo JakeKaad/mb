@@ -13,3 +13,12 @@
  *= require_self
  */
 @import "bootstrap";
+@import "buttons";
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}

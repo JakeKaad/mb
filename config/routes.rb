@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   resources :events do
     resources :infos, only: [:create]
   end
+
+  resources :infos do
+    resources :notes, only: [:create, :edit, :update]
+  end
 end
