@@ -22,6 +22,6 @@ Rails.application.routes.draw do
   end
 
   resources :infos do
-    resources :notes, only: [:create]
+    resources :notes, only: [:create, :edit, :update]
   end
 end

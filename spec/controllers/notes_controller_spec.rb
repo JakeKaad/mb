@@ -10,8 +10,6 @@ describe NotesController do
     let(:info) { create :info, event: event }
     let(:note_params) { attributes_for :note }
 
-
-
     context "success -info" do
       before do
         login user
@@ -72,6 +70,56 @@ describe NotesController do
       it "should redirect_to root_path with no event" do
         expect(response).to redirect_to root_path
       end
+    end
+  end
+
+  describe "get edit" do
+    let(:user) { create :user }
+    let(:info) { create :info }
+    let(:note) { create :note, notable: info }
+
+    before do
+      login user
+      get :edit, info_id: info.id, id: note.id
+    end
+
+    it "should assign @notable" do
+      expect(assigns(:notable)).to eq info
+    end
+
+    it "should assign @note" do
+      expect(assigns(:note)).to eq note
+    end
+
+    it "should redirect back with an html" do
+      expect(response).to redirect_to company_event_path info.event.company, info.event
+    end
+  end
+
+  describe "POST update" do
+    let(:user) { create :user }
+    let(:info) { create :info }
+    let(:note) { create :note, notable: info }
+
+    before do
+      login user
+      post :update, info_id: info.id, id: note.id, note:  { message: "Updated notes" }
+    end
+
+    it "should assign @notable" do
+      expect(assigns(:notable)).to eq info
+    end
+
+    it "should assign @note" do
+      expect(assigns(:note)).to eq note
+    end
+
+    it "should update @note" do
+      expect(note.reload.message).to eq "Updated notes"
+    end
+
+    it "should redirect back with an html" do
+      expect(response).to redirect_to company_event_path info.event.company, info.event
     end
   end
 end

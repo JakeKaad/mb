@@ -21,11 +21,10 @@
 
     <% info.notes.each do |note| %>
     <div class="row">
-      <li class="list-group-item">
-        <%= note.message %>
+      <li class="list-group-item" id=<%= "note_#{note.id}_li" %>>
+        <%= render 'notes/info_note', note: note, info: info %>
       </li>
     </div>
     <% end %>
     <%= render "notes/form", notable: info %>
-
 </ul>

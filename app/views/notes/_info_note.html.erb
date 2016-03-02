@@ -1,0 +1,7 @@
+<%= note.message %>
+<div class="btn-group pull-right">
+  <button class="btn btn-danger bg-right">Delete</button>
+  <%= link_to edit_info_note_path(info, note), remote: true do %>
+    <button class="btn btn-primary bg-right">Edit</button>
+  <% end %>
+</div>

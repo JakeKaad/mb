@@ -14,6 +14,27 @@ class NotesController < ApplicationController
     redirect_to company_event_path(note.event.company, note.event)
   end
 
+  def edit
+    @notable = set_notable
+    @note = Note.find params[:id]
+
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to company_event_path(@notable.event.company, @notable.event), alert: "URL not supported" }
+    end
+  end
+
+  def update
+    @notable = set_notable
+    @note = Note.find params[:id]
+    @note.update(note_params)
+
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to company_event_path(@notable.event.company, @notable.event), alert: "URL not supported" }
+    end
+  end
+
 
   private
 
