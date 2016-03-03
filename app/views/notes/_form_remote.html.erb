@@ -1,7 +1,7 @@
 <%= form_for [notable, note], remote: true, class: "form-inline" do |f| %>
   <div class="form-group">
     <%= f.label :message %>
-    <%= f.text_area :message, class: "form-control" %>
+    <%= f.text_area :message, class: "form-control input-#{note.new_record? ? "new" : note.id }-message" %>
   </div>
 
   <%= f.hidden_field :event_id, value: notable.event.id %>
