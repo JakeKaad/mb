@@ -1,7 +1,7 @@
 class InfosController < ApplicationController
   before_action :require_sign_in
   before_action :set_event
-  before_action :set_info, only: [:edit]
+  before_action :set_info, only: [:edit, :update]
 
   def create
     info = Info.new(info_params)
@@ -22,7 +22,14 @@ class InfosController < ApplicationController
   end
 
   def update
-
+    if @info.update(info_params)
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: "Not supported."}
+        format.js {  }
+      end
+    else
+      redirect_to root_path, alert: "Something went wrong."
+    end
   end
 
   private

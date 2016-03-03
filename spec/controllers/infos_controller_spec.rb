@@ -68,4 +68,34 @@ describe InfosController do
       end
     end
   end
+
+  describe 'PATCH update' do
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
+    let(:user) { create :user }
+    let(:info) { create :info, event: event}
+
+    context "success" do
+      before do
+        login user
+        post :update, event_id: event.id, id: info.id, info: { napkin_colors: "PINK AND YELLOW"}
+      end
+
+      it "should set @event" do
+        expect(assigns(:event)).to eq event
+      end
+
+      it "should set @info" do
+        expect(assigns(:info)).to eq info
+      end
+
+      it "should redirect html requests to root path" do
+        expect(response).to redirect_to root_path
+      end
+
+      it "should update info" do
+        expect(info.reload.napkin_colors).to eq "PINK AND YELLOW"
+      end
+    end
+  end
 end
