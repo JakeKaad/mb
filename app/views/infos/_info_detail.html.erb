@@ -1,19 +1,19 @@
 <ul class="list-group list-group-flush">
 
   <div class="row">
-    <li class="list-group-item"><h2>Setup</h2></li>
+    <li class="list-group-item">
+      <h2>Setup</h2>
+      <div class="btn-group pull-right">
+        <%= link_to edit_event_info_path(event, info), remote: true do %>
+          <button class="btn btn-primary bg-right">Edit setup information</button>
+        <% end %>
+      </div>
+    </li>
   </div>
 
-    <%= render "infos/info_list_item", title: "Linen colors", property: info.linen_colors %>
-    <%= render "infos/info_list_item", title: "Napkin colors", property: info.napkin_colors %>
-    <%= render "infos/info_list_item", title: "Centerpieces", property: info.centerpieces %>
-    <%= render "infos/info_list_item", title: "Final guest count", property: info.final_guest_count %>
-    <%= render "infos/info_list_item", title: "Number of tables", property: info.number_of_tables %>
-    <%= render "infos/info_list_item", title: "Guests per table", property: info.guests_per_table %>
-    <%= render "infos/info_list_item", title: "Placesetting", property: info.placesetting %>
-    <%= render "infos/info_list_item", title: "Napkin fold", property: info.napkin_fold %>
-    <%= render "infos/info_list_item", title: "Water service", property: info.water_service %>
-    <%= render "infos/info_list_item", title: "Coffee service", property: info.coffee_service %>
+    <div id="info-list-group">
+      <%= render 'infos/info_list_group', info: info %>
+    </div>
 
     <div class="row">
       <li class="list-group-item"><h2>Notes</h2></li>

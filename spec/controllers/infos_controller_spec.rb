@@ -42,4 +42,30 @@ describe InfosController do
       end
     end
   end
+
+  describe 'GET edit' do
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
+    let(:user) { create :user }
+    let(:info) { create :info, event: event}
+
+    context "success" do
+      before do
+        login user
+        get :edit, event_id: event.id, id: info.id
+      end
+
+      it "should set @event" do
+        expect(assigns(:event)).to eq event
+      end
+
+      it "should set @info" do
+        expect(assigns(:info)).to eq info
+      end
+
+      it "should redirect html requests to root path" do
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
 end

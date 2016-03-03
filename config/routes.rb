@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :events do
-    resources :infos, only: [:create]
+    resources :infos, only: [:create, :edit, :update]
   end
 
   resources :infos do

@@ -1,6 +1,7 @@
 class InfosController < ApplicationController
   before_action :require_sign_in
   before_action :set_event
+  before_action :set_info, only: [:edit]
 
   def create
     info = Info.new(info_params)
@@ -13,10 +14,25 @@ class InfosController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: "Not supported."}
+      format.js {  }
+    end
+  end
+
+  def update
+
+  end
+
   private
 
   def set_event
     @event = Event.find params[:event_id]
+  end
+
+  def set_info
+    @info = Info.find params[:id]
   end
 
   def info_params
