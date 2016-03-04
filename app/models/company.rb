@@ -9,6 +9,10 @@ class Company < ActiveRecord::Base
   has_many :documents
   has_many :rooms
 
+  has_many :bookings
+  has_many :booked_events, through: :bookings, class_name: "Event", foreign_key: "event_id"
+  has_many :primary_contacts, through: :bookings, class_name: "Customer", foreign_key: "customer_id"
+
   ####################################
   ### Validations
   ####################################

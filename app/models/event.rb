@@ -8,6 +8,11 @@ class Event < ActiveRecord::Base
   has_many :documents
   belongs_to :room
 
+  has_and_belongs_to_many :customers
+
+  has_one :booking
+  has_one :primary_contact, through: :booking, foreign_key: "customer_id", class_name: "Customer"
+
   ####################################
   ### Event-information Relations
   ####################################

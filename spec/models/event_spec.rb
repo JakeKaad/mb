@@ -10,6 +10,10 @@ describe Event do
   it { should belong_to :room }
   it { should have_one :info }
 
+  it { should have_one(:booking) }
+  it { should have_one(:primary_contact).through(:booking).with_foreign_key("customer_id").class_name("Customer") }
+  it { should have_and_belong_to_many(:customers) }
+
   ####################################
   ### Validations
   ####################################
