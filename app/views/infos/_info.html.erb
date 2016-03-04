@@ -1,10 +1,15 @@
 <div class="col-md-12">
   <div class="card card-block">
     <% if info.new_record? %>
-      <h3 class="card-title"> Add event information</h3>
+      <h2 class="card-title"> Add event information</h2>
       <%= render "infos/form", event: event, info: info %>
     <% else %>
-      <h3 class="card-title">Event information</h3>
+      <h2 class="card-title">Setup information</h2>
+      <div class="btn-group pull-right card-text">
+        <%= link_to edit_event_info_path(event, info), remote: true do %>
+          <button class="btn btn-primary bg-right">Edit setup information</button>
+        <% end %>
+      </div>
       <%= render "infos/info_detail", event: event, info: info %>
     <% end %>
   </div>
