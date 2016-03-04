@@ -1,6 +1,38 @@
-<H1> <%= @event.name %> </h1>
+<div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-10">
+      <H1> <%= @event.name %> </h1>
 
-<h5> <%= @event.hall %> </h5>
-<h5> <%= @event.event_date %> </h5>
+      <h5> <%= @event.hall %> </h5>
+      <h5> <%= @event.event_date %> </h5>
+    </div>
+  </div>
 
-<%= render 'infos/info', event: @event, info: @event_details.info %>
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="nav-item">
+          <%= link_to "Setup information", company_event_path(@company, @event), class: "nav-link #{"active" if params[:tab].nil?}" %>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contacts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Timeline</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Staff</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="col-md-8" id="event-display">
+      <%= render 'infos/info', event: @event, info: @event_details.info %>
+    </div>
+  </div>
+</div>
