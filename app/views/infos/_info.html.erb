@@ -7,7 +7,7 @@
       <h2 class="card-title">Setup information</h2>
       <div class="btn-group pull-right card-text">
         <%= link_to edit_event_info_path(event, info), remote: true do %>
-          <button class="btn btn-primary bg-right">Edit setup information</button>
+          <button class="btn btn-primary bg-right" id=<%="edit_#{info.id}"%>>Edit setup information</button>
         <% end %>
       </div>
       <%= render "infos/info_detail", event: event, info: info %>

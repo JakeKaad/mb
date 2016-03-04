@@ -50,4 +50,13 @@ feature "Company and meta information" do
     click_on "Add note"
     expect(page).to have_content "Something went wrong, note not saved."
   end
+
+  scenario "can update setup information", js: true do
+    visit company_event_path company, event_with_info
+    click_on "edit_#{event_with_info.info.id}"
+    fill_in "Linen colors", with: "PINK AND YELLOW"
+    click_on "Update info"
+    expect(page).to have_content "PINK AND YELLOW"
+    expect(event_with_info.info.reload.linen_colors).to eq "PINK AND YELLOW"
+  end
 end
