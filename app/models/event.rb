@@ -8,11 +8,14 @@ class Event < ActiveRecord::Base
   has_many :documents
   belongs_to :room
 
+  ####################################
+  ### Event-customer Relations
+  ####################################
   has_and_belongs_to_many :customers
 
   has_one :booking
-  has_one :primary_contact, through: :booking, foreign_key: "customer_id", class_name: "Customer"
-
+  has_many :primary_contacts, through: :booking, source: :customer
+  accepts_nested_attributes_for :primary_contacts
   ####################################
   ### Event-information Relations
   ####################################
@@ -35,5 +38,9 @@ class Event < ActiveRecord::Base
 
   def hall
     event_hall
+  end
+
+  def primary_contact
+    primary_contacts.first
   end
 end

@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new company_id: @company.id
     authorize! :create, @event
+    @primary_contact = @event.primary_contacts.new
   end
 
   def create

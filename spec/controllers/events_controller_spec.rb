@@ -59,6 +59,10 @@ describe EventsController do
       it "should assign @events" do
         expect(assigns(:event).new_record?).to be_truthy
       end
+
+      it "should assign @primary_contact" do
+        expect(assigns(:primary_contact).new_record?).to be_truthy
+      end
     end
   end
 

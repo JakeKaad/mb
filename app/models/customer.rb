@@ -10,7 +10,7 @@ class Customer < ActiveRecord::Base
    ####################################
 
    has_many :bookings
-   has_many :booked_events, through: :bookings, foreign_key: "event_id", class_name: "Event"
+   has_many :booked_events, through: :bookings, source: :event
    has_many :companies, through: :bookings
    has_and_belongs_to_many :events
 
