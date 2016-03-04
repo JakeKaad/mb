@@ -3,8 +3,10 @@ class NotesController < ApplicationController
   before_action :ensure_event, only: [:create]
 
   def create
+
     note = Note.new(note_params)
     notable = set_notable
+    authorize! :update, notable.event
     if note.save
       notable.notes << note
       flash[:notice] = "Note saved."
@@ -15,9 +17,10 @@ class NotesController < ApplicationController
   end
 
   def edit
+
     @notable = set_notable
     @note = Note.find params[:id]
-
+    authorize! :update, @note.event
     respond_to do |format|
       format.js { }
       format.html { redirect_to company_event_path(@notable.event.company, @notable.event), alert: "URL not supported" }
@@ -25,8 +28,10 @@ class NotesController < ApplicationController
   end
 
   def update
+
     @notable = set_notable
     @note = Note.find params[:id]
+    authorize! :update, @note.notable.event
     @note.update(note_params)
 
     respond_to do |format|

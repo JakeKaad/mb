@@ -6,15 +6,20 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find params[:id]
+
+    authorize! :read, @event
     handle @event
   end
 
   def new
-    @event = Event.new
+    @event = Event.new company_id: @company.id
+    authorize! :create, @event
   end
 
   def create
     @event = @company.events.new(event_params)
+
+    authorize! :create, @event
     if @event.save
       redirect_to company_event_path(@company, @event), notice: "Event was added succesfully."
     else

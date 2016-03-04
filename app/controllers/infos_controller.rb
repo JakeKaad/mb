@@ -6,6 +6,8 @@ class InfosController < ApplicationController
   def create
     info = Info.new(info_params)
     info.event = @event
+    authorize! :update, @event
+
     if info.save
       redirect_to company_event_path(@event.company, @event), notice: "Information added to #{@event.name}."
     else
@@ -15,6 +17,7 @@ class InfosController < ApplicationController
   end
 
   def edit
+    authorize! :update, @event
     respond_to do |format|
       format.html { redirect_to root_path, alert: "Not supported."}
       format.js {  }
@@ -22,6 +25,7 @@ class InfosController < ApplicationController
   end
 
   def update
+    authorize! :update, @event
     if @info.update(info_params)
       respond_to do |format|
         format.html { redirect_to root_path, alert: "Not supported."}

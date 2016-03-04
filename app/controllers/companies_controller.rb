@@ -1,10 +1,9 @@
 class CompaniesController < ApplicationController
-
-  before_action :require_sign_in
+  before_action :set_company
 
   def show
     authorize! :read, @company
-    @events = @company.events
+    @events = @company.events if @company
   end
 
   private

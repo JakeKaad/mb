@@ -74,9 +74,11 @@ describe NotesController do
   end
 
   describe "get edit" do
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
     let(:user) { create :user }
-    let(:info) { create :info }
-    let(:note) { create :note, notable: info }
+    let(:info) { create :info, event: event }
+    let(:note) { create :note, notable: info, event: event }
 
     before do
       login user
@@ -97,9 +99,11 @@ describe NotesController do
   end
 
   describe "POST update" do
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
     let(:user) { create :user }
-    let(:info) { create :info }
-    let(:note) { create :note, notable: info }
+    let(:info) { create :info, event: event }
+    let(:note) { create :note, notable: info, event: event }
 
     before do
       login user
