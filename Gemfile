@@ -16,6 +16,8 @@ gem 'docx', '~> 0.2.07', :require => ["docx"]
 gem 'aws-sdk', '< 2.0'
 gem 'paperclip'
 
+gem 'cancancan', '~> 1.10'
+
 # Bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha3'
 source 'https://rails-assets.org' do

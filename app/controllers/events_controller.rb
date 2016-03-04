@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+
   include EventHandler
   before_action :require_sign_in
   before_action :set_company
