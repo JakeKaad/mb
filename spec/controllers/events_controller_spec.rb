@@ -59,10 +59,6 @@ describe EventsController do
       it "should assign @events" do
         expect(assigns(:event).new_record?).to be_truthy
       end
-
-      it "should assign @primary_contact" do
-        expect(assigns(:primary_contact).new_record?).to be_truthy
-      end
     end
   end
 
@@ -71,13 +67,16 @@ describe EventsController do
       let(:company) { user.company }
       let(:event_params) { attributes_for :event }
       let(:user) { create :user }
+      let(:customer_params) { attributes_for :customer }
+      let(:primary_contact) { build :customer }
 
       before do
         login user
       end
 
       context "with valid inputs" do
-        before { post :create, company_id: company.id, event: event_params }
+        before { post :create, company_id: company.id, event: event_with_nested_customer_attributes(event_params, customer_params) }
+
         it "should assign @company" do
           expect(assigns(:company)).to eq company
         end
@@ -94,12 +93,20 @@ describe EventsController do
         it "should render a flash notice" do
           expect(flash[:notice]).to_not be_empty
         end
+
+        it "should assign @primary_contact" do
+          expect(assigns(:event).primary_contact.email).to eq primary_contact.email
+        end
+
+        it "should create a Booking" do
+          expect(Booking.first.event_id).to eq assigns(:event).id
+        end
       end
 
       context "with invalid inputs" do
         before do
           event_params[:name] = nil
-          post :create, company_id: company.id, event: event_params
+          post :create, company_id: company.id, event: event_with_nested_customer_attributes(event_params, customer_params)
         end
 
         it "should assign @company" do
@@ -121,4 +128,10 @@ describe EventsController do
       end
     end
   end
+end
+
+
+def event_with_nested_customer_attributes event_params, attributes
+  event_params[:primary_contact_attributes] = attributes
+  event_params
 end

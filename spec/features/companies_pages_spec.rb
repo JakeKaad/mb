@@ -28,6 +28,9 @@ feature "Interacting with the company dashboard" do
     select room.name, from: "Room"
     fill_in "Start time", with: "02:30 PM"
     fill_in "event_date", with: "2016-12-12"
+    fill_in "First name", with: "John"
+    fill_in "Last name", with: "Doe"
+    fill_in "Email", with: "John@Doe.com"
 
     click_on "Create event"
     expect(page).to have_content "Event was added succesfully."

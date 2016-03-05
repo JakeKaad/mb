@@ -3,6 +3,9 @@
 <div class="container">
   <%= form_for([@company, @event]) do |f| %>
     <%= render 'layouts/errors', object: @event %>
+
+    <h4> Event information </h4>
+    <br>
     <fieldset class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control" %>
@@ -22,6 +25,29 @@
       <%= f.label :date %>
       <%= f.date_field :date, class: "form-control" %>
     </fieldset>
+
+    <h4>Primary Contact</h4>
+    <br>
+    <%= f.fields_for :primary_contact do |form| %>
+      <div class="row">
+        <fieldset class="form-group col-md-6">
+          <%= form.label :first_name %>
+          <%= form.text_field :first_name, class: "form-control" %>
+        </fieldset>
+
+        <fieldset class="form-group col-md-6">
+          <%= form.label :last_name %>
+          <%= form.text_field :last_name, class: "form-control" %>
+        </fieldset>
+      </div>
+
+      <fieldset class="form-group">
+        <%= form.label :email %>
+        <%= form.email_field :email, class: "form-control" %>
+      </fieldset>
+        <%= form.hidden_field :password, value: SecureRandom.base64(24) %>
+    <% end %>
+
 
     <%= f.submit class: "btn btn-primary" %>
   <% end %>

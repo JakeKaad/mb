@@ -11,10 +11,8 @@ describe Event do
   it { should have_one :info }
 
   it { should have_one(:booking) }
-  it { should have_many(:primary_contacts).through(:booking).source(:customer) }
+  it { should have_one(:primary_contact).through(:booking).class_name("Customer").with_foreign_key(:customer_id) }
   it { should have_and_belong_to_many(:customers) }
-
-  it { should accept_nested_attributes_for :primary_contacts }
 
   ####################################
   ### Validations
