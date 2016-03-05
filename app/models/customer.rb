@@ -20,4 +20,16 @@ class Customer < ActiveRecord::Base
    ####################################
 
    validates_presence_of :email
+
+   def phone
+     main_contact.phone
+   end
+
+   private
+
+   def main_contact
+     contact_cards.where(main: true).first
+   end
+
+
 end

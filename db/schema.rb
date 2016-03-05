@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305155440) do
+ActiveRecord::Schema.define(version: 20160305172940) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "company_id",  null: false
@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(version: 20160305155440) do
     t.string  "city"
     t.string  "state"
     t.string  "zip"
-    t.integer "contactable_id",      null: false
-    t.string  "contactable_type",    null: false
+    t.integer "contactable_id",                      null: false
+    t.string  "contactable_type",                    null: false
+    t.boolean "main",                default: false
   end
 
   create_table "customers", force: :cascade do |t|
