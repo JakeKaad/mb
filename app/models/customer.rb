@@ -13,6 +13,8 @@ class Customer < ActiveRecord::Base
    has_many :booked_events, through: :bookings, class_name: "Event", foreign_key: :event_id
    has_and_belongs_to_many :events
 
+   has_many :contact_cards, as: :contactable
+
    ####################################
    ### Validations
    ####################################

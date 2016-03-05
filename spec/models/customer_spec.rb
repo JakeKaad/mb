@@ -8,6 +8,8 @@ describe Customer do
   it { should have_many(:booked_events).through(:bookings).class_name("Event").with_foreign_key(:event_id) }
   it { should have_and_belong_to_many(:events) }
 
+  it { should have_many :contact_cards }
+
   ####################################
   ### Validations
   ####################################
