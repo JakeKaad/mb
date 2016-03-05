@@ -25,6 +25,7 @@ class EventsController < ApplicationController
 
     if @event.save
       @event.primary_contact = @primary_contact
+      @event.customers << @event.primary_contact
       Booking.create(event_id: @event.id, customer_id: @event.primary_contact.id, company_id: @company.id)
       redirect_to company_event_path(@company, @event), notice: "Event was added succesfully."
     else
