@@ -9,6 +9,7 @@ describe EventsController do
       let(:event) { create :event, company: company }
       let(:user) { create :user }
 
+
       before do
         login user
         get :show, company_id: company.id, id: event.id
@@ -68,13 +69,17 @@ describe EventsController do
       let(:event_params) { attributes_for :event_params }
       let(:user) { create :user }
       let(:customer_params) { attributes_for :customer }
+      let(:contact_params) { attributes_for :contact_card }
 
       before do
         login user
       end
 
       context "with valid inputs" do
-        before { post :create, company_id: company.id, event: event_with_nested_customer_attributes(event_params, customer_params) }
+        before do
+           post :create, company_id: company.id,
+             event: event_with_nested_attributes(event_params, customer_params, contact_params)
+          end
 
         it "should assign @company" do
           expect(assigns(:company)).to eq company
@@ -105,12 +110,16 @@ describe EventsController do
           expect(Event.first.primary_contact).to eq Customer.first
           expect(Customer.first.booked_events).to include Event.first
         end
+
+        it "should create a contact card for customer" do
+          expect(assigns(:event).primary_contact.contact_cards).to_not be_empty
+        end
       end
 
       context "with invalid inputs" do
         before do
           event_params[:name] = nil
-          post :create, company_id: company.id, event: event_with_nested_customer_attributes(event_params, customer_params)
+          post :create, company_id: company.id, event: event_with_nested_attributes(event_params, customer_params, contact_params)
         end
 
         it "should assign @company" do
@@ -135,7 +144,8 @@ describe EventsController do
 end
 
 
-def event_with_nested_customer_attributes event_params, attributes
-  event_params[:primary_contact_attributes] = attributes
+def event_with_nested_attributes event_params, customer_attributes, contact_attributes
+  event_params[:primary_contact_attributes] = customer_attributes
+  event_params[:contact_card] = contact_attributes
   event_params
 end

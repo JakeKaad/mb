@@ -23,6 +23,7 @@ class EventsController < ApplicationController
     @event = @company.events.new(event_params)
     authorize! :create, @event
     @primary_contact = Customer.first_or_create(primary_contact_attributes)
+    @contact_card = @primary_contact.contact_cards.create(contact_card_params)
 
     if @event.save && @event.add_primary?(@primary_contact)
       redirect_to company_event_path(@company, @event), notice: "Event was added succesfully."
@@ -40,6 +41,10 @@ class EventsController < ApplicationController
 
   def primary_contact_attributes
     params[:event].require(:primary_contact_attributes).permit(:first_name, :last_name, :password, :email)
+  end
+
+  def contact_card_params
+    params[:event].require(:contact_card).permit(:phone, :street_address, :address_second_line, :city, :state, :zip)
   end
 
   def event_params
