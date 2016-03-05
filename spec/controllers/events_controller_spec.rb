@@ -101,6 +101,11 @@ describe EventsController do
         it "should create a Booking" do
           expect(Booking.first.event_id).to eq assigns(:event).id
         end
+
+        it "should set up relationships properly" do
+          expect(Event.first.primary_contact).to eq Customer.first
+          expect(Customer.first.booked_events).to include Event.first
+        end
       end
 
       context "with invalid inputs" do
