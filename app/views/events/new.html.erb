@@ -1,6 +1,6 @@
 <%= render 'companies/header', company: @company, title: "Add new event" %>
 
-<div class="container">
+<div class="container col-md-9 col-md-offset-1">
   <%= form_for([@company, @event]) do |f| %>
     <%= render 'layouts/errors', object: @event %>
 
@@ -11,20 +11,22 @@
       <%= f.text_field :name, class: "form-control" %>
     </fieldset>
 
-    <fieldset class="form-group">
-      <%= f.label :room_id, "Room" %>
-      <%= f.collection_select(:room_id, @company.rooms, :id, :name) %>
-    </fieldset>
+    <div class="row">
+      <fieldset class="form-group col-md-4">
+        <%= f.label :room_id, "Room" %>
+        <%= f.collection_select(:room_id, @company.rooms, :id, :name, {}, { class: "form-control" }) %>
+      </fieldset>
 
-    <fieldset class="form-group">
-      <%= f.label :start_time%>
-      <%= f.time_field :start_time, class: "form-control" %>
-    </fieldset>
+      <fieldset class="form-group col-md-4">
+        <%= f.label :start_time%>
+        <%= f.time_field :start_time, class: "form-control" %>
+      </fieldset>
 
-    <fieldset class="form-group">
-      <%= f.label :date %>
-      <%= f.date_field :date, class: "form-control" %>
-    </fieldset>
+      <fieldset class="form-group col-md-4">
+        <%= f.label :date %>
+        <%= f.date_field :date, class: "form-control" %>
+      </fieldset>
+    </div>
 
     <h4>Primary Contact</h4>
     <br>
@@ -46,6 +48,42 @@
         <%= form.email_field :email, class: "form-control" %>
       </fieldset>
         <%= form.hidden_field :password, value: SecureRandom.base64(24) %>
+    <% end %>
+
+    <%= f.fields_for @contact_card do |form| %>
+
+      <fieldset class="form-group">
+        <%= form.label :phone %>
+        <%= form.phone_field :phone, class: "form-control" %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <%= form.label :street_address %>
+        <%= form.text_field :street_address, class: "form-control" %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <%= form.label :address_second_line %>
+        <%= form.text_field :address_second_line, class: "form-control" %>
+      </fieldset>
+
+      <div class="row">
+        <fieldset class="form-group col-md-6">
+          <%= form.label :city %>
+          <%= form.text_field :city, class: "form-control" %>
+        </fieldset>
+
+        <fieldset class="form-group col-md-3">
+          <%= form.label :state %>
+          <%= form.select :state, options_for_select(us_states),  {}, { class: "form-control" } %>
+        </fieldset>
+
+        <fieldset class="form-group col-md">
+          <%= form.label :zip %>
+          <%= form.email_field :zip, class: "form-control" %>
+        </fieldset>
+      </div>
+
     <% end %>
 
 
