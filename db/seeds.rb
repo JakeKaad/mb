@@ -16,8 +16,8 @@ n = 1
 15.times do
   event = Event.create date: n.weeks.from_now, start_time: n.weeks.from_now, name: event_names.sample, room_id: company.rooms.sample.id
   company.events << event
-  event.primary_contact = Customer.create email: "test_#{n}@test.test", first_name: "John", last_name: "Doe", password: "password"
-  events.customers << event.primary_contact
+  event.primary_contact = Customer.create email: "test_#{n}@test.test", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, password: "password"
+  event.customers << event.primary_contact
   Booking.create event_id: event.id, customer_id: event.primary_contact.id, company_id: company.id
   n += 1
 end
