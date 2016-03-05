@@ -30,4 +30,18 @@ describe ContactCard do
       expect(card.valid?).to be_truthy
     end
   end
+
+  describe "#assign_main" do
+    let(:customer) { create :customer }
+    let!(:card) { create :contact_card, contactable: customer }
+    let(:card_two) { create :contact_card, contactable: customer }
+
+    it "should assign main if it is the first contact card" do
+      expect(card.main).to be_truthy
+    end
+
+    it "shouldnt assign main to second contact card" do
+      expect(card_two.main).to be_falsey
+    end
+  end
 end

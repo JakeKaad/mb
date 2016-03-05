@@ -16,6 +16,12 @@ class ContactCard < ActiveRecord::Base
   validate :only_one_main_per_contactable
   scope :main, -> {  where(main: true) }
 
+  #####
+  # Assign main to first contact card
+  ####
+  before_create :assign_main
+
+
   def main?
     main
   end
@@ -30,8 +36,14 @@ class ContactCard < ActiveRecord::Base
     if persisted?
       matches = matches.where('id != ?', id)
     end
+
     if matches.exists?
       errors.add(:contact_card, 'cannot have more than one main contact card')
     end
+  end
+
+  def assign_main
+    return if contactable.contact_cards.any?
+    self.main = true
   end
 end
