@@ -9,7 +9,11 @@ feature "Company and meta information" do
   let!(:event_without_info) { create :event, company: company }
   let!(:event_with_info) { create :event_with_info, company: company }
 
-  before { login user }
+  before do
+    login user
+    event_without_info.add_primary create :customer
+    event_with_info.add_primary create :customer
+  end
 
   scenario "event without info should display the info form" do
     visit company_event_path company, event_without_info

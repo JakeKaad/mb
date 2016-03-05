@@ -39,4 +39,11 @@ class Event < ActiveRecord::Base
   def hall
     event_hall
   end
+
+  def add_primary? customer
+    customers << customer
+    Booking.create(event_id: id, customer_id: customer.id, company_id: company_id)
+  end
+
+  alias_method :add_primary, :add_primary?
 end

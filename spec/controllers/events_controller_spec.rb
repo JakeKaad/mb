@@ -65,10 +65,9 @@ describe EventsController do
   describe "POST create" do
     context "as a logged in user" do
       let(:company) { user.company }
-      let(:event_params) { attributes_for :event }
+      let(:event_params) { attributes_for :event_params }
       let(:user) { create :user }
       let(:customer_params) { attributes_for :customer }
-      let(:primary_contact) { build :customer }
 
       before do
         login user
@@ -95,7 +94,7 @@ describe EventsController do
         end
 
         it "should assign @primary_contact" do
-          expect(assigns(:event).primary_contact.email).to eq primary_contact.email
+          expect(assigns(:event).primary_contact.email).to eq customer_params[:email]
         end
 
         it "should create a Booking" do

@@ -23,4 +23,20 @@ describe Event do
   it { should validate_presence_of :start_time }
   it { should validate_presence_of :date }
   it { should validate_presence_of :company_id }
+
+
+  describe "#add_primary?" do
+    let(:event) { create :event }
+    let(:customer) { create :customer }
+
+    it "should make customer the primary contact" do
+      event.add_primary? customer
+      expect(event.primary_contact).to eq customer
+    end
+
+    it "should add customer to event customers" do
+      event.add_primary? customer
+      expect(event.customers).to include customer
+    end
+  end
 end

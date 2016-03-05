@@ -9,6 +9,7 @@ feature "notes on event information" do
 
   before do
      login_as(user, scope: :user)
+     event.add_primary create :customer
      visit root_path
    end
 
