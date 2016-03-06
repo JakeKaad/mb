@@ -2,18 +2,15 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-2">
       <H1> <%= @event.name %> </h1>
-      <h5> <%= @event.room.name %> </h5>
-      <h5> <%= @event.event_date %> </h5>
-      <h5> Primary Contact </h5>
+      <h6> <%= @event.room.name %> </h6>
+      <h6> <%= @event.event_date %> </h6>
+
       <div class="row">
-        <span class="col-md-3">
-          <%= "#{@event.primary_contact.first_name} #{@event.primary_contact.last_name}" %>
-        </span>
-        <span class-"col-md-4">
-           <%= "Phone: #{@event.primary_contact.phone}" %>
-        </span>
-        <span class-"col-md-4">
-           <%= "Email: #{@event.primary_contact.email}" %>
+        <h6 class="col-md-2"> Primary Contact: </h6>
+        <span class= "col-md-8">
+          <%= "#{@event.primary_contact.first_name} #{@event.primary_contact.last_name}    |" %>
+           <%= "#{@event.primary_contact.phone}    |" %>
+           <%= @event.primary_contact.email %>
         </span>
       </div>
     </div>
