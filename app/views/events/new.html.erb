@@ -4,10 +4,10 @@
   <%= form_for([@company, @event]) do |f| %>
     <%= render 'layouts/errors', object: @event %>
 
-    <h4> Event information </h4>
+    <h4> Event Information </h4>
     <br>
     <fieldset class="form-group">
-      <%= f.label :name %>
+      <%= f.label :name, "Event name" %>
       <%= f.text_field :name, class: "form-control" %>
     </fieldset>
 
@@ -28,8 +28,8 @@
       </fieldset>
     </div>
 
-    <h4>Primary Contact</h4>
-    <br>
+    <br><h4>Primary Contact</h4><br>
+
     <%= f.fields_for :primary_contact do |form| %>
       <div class="row">
         <fieldset class="form-group col-md-6">
@@ -56,6 +56,8 @@
         <%= form.label :phone %>
         <%= form.phone_field :phone, class: "form-control" %>
       </fieldset>
+
+      <br><h4> Billable Address </h4><br>
 
       <fieldset class="form-group">
         <%= form.label :street_address %>

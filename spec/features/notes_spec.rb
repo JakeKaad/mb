@@ -10,6 +10,7 @@ feature "notes on event information" do
   before do
      login_as(user, scope: :user)
      event.add_primary create :customer
+     event.primary_contact.contact_cards.create(attributes_for :contact_card)
      visit root_path
    end
 

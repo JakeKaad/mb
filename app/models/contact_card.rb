@@ -14,7 +14,7 @@ class ContactCard < ActiveRecord::Base
   validates_presence_of :contactable_type
 
   validate :only_one_main_per_contactable
-  scope :main, -> {  where(main: true) }
+  scope :main_card, -> {  where(main: true).first }
 
   #####
   # Assign main to first contact card
@@ -31,13 +31,19 @@ class ContactCard < ActiveRecord::Base
   def only_one_main_per_contactable
     return unless main?
 
-    matches = contactable.contact_cards.main
+    if contactable_id.nil? || contactable_type.nil?
+      errors.add(:contact_card, 'nobody is assigned to this card')
+      return
+    end
 
+
+    match = contactable.contact_cards.main_card
+  
     if persisted?
       matches = matches.where('id != ?', id)
     end
 
-    if matches.exists?
+    if match.present?
       errors.add(:contact_card, 'cannot have more than one main contact card')
     end
   end

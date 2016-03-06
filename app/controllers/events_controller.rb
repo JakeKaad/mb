@@ -22,7 +22,8 @@ class EventsController < ApplicationController
   def create
     @event = @company.events.new(event_params)
     authorize! :create, @event
-    @primary_contact = Customer.first_or_create(primary_contact_attributes)
+    @primary_contact = Customer.find_or_create_by(email: primary_contact_attributes["email"])  
+    @primary_contact.update(primary_contact_attributes)
     @contact_card = @primary_contact.contact_cards.create(contact_card_params)
 
     if @event.save && @event.add_primary?(@primary_contact)

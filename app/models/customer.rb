@@ -22,13 +22,13 @@ class Customer < ActiveRecord::Base
    validates_presence_of :email
 
    def phone
-     main_contact.phone
+     main_card.phone
    end
 
    private
 
-   def main_contact
-     contact_cards.where(main: true).first
+   def main_card
+     contact_cards.main_card
    end
 
 

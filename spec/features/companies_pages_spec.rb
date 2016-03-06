@@ -24,7 +24,7 @@ feature "Interacting with the company dashboard" do
     room = create :room, company: company
     click_on "Add event"
 
-    fill_in "Name", with: event_params[:name]
+    fill_in "Event name", with: event_params[:name]
     select room.name, from: "Room"
     fill_in "Start time", with: "02:30 PM"
     fill_in "event_date", with: "2016-12-12"

@@ -17,11 +17,12 @@ describe ContactCard do
 
   describe "#only_one_main_per_contactable" do
     let(:customer) { create :customer }
-    let(:card) { build :contact_card, contactable: customer, main: true }
-    let!(:card_two) { create :contact_card, contactable: customer, main: true, phone: "5555555555" }
+    let(:card) { build :contact_card, contactable: customer }
+    let!(:card_two) { create :contact_card, contactable: customer, phone: "5555555555" }
 
     # before { customer.contact_cards << card_two }
     it "should prevent two cards from being the main contact card" do
+      card.main = true
       expect(card.valid?).to be_falsey
     end
 

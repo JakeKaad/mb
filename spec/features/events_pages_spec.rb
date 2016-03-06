@@ -13,6 +13,9 @@ feature "Company and meta information" do
     login user
     event_without_info.add_primary create :customer
     event_with_info.add_primary create :customer
+
+    event_without_info.primary_contact.contact_cards.create(attributes_for :contact_card)
+    event_with_info.primary_contact.contact_cards.create(attributes_for :contact_card)
   end
 
   scenario "event without info should display the info form" do
