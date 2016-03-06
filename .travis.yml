@@ -5,3 +5,4 @@ bundler_args: --without production
 script: bundle exec rspec
 before_script:
   - bundle exec rake db:create db:schema:load db:test:prepare
+cache: bundler
