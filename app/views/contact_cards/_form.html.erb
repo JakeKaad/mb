@@ -1,8 +1,9 @@
 <%= form_for [customer, contact_card], remote: true do |form| %>
-<fieldset class="form-group">
-  <%= form.label :email %>
-  <%= form.phone_field :email, class: "form-control" %>
-</fieldset>
+  <%= render 'layouts/errors', object: contact_card %>
+  <fieldset class="form-group">
+    <%= form.label :email %>
+    <%= form.phone_field :email, class: "form-control" %>
+  </fieldset>
 
   <fieldset class="form-group">
     <%= form.label :phone %>

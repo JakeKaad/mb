@@ -21,51 +21,8 @@
 
       </div>
     </ul>
-
-
-      <% customer.contact_cards.each do |card| %>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="card-block">
-              <h6 class="card-title">
-                Address
-              </h6>
-              <p class="card-text">
-                <%= card.street_address %><br>
-                <% if card.address_second_line.present? %>
-                  <%= card.address_second_line %><br>
-                <% end %>
-                <%= "#{card.city}, #{card.state} #{card.zip}" %>
-              </p>
-            </div>
-          </li>
-
-          <li class="list-group-item">
-            <% if card.phone.present? %>
-              <div class="card-block">
-                <h6 class="card-title">
-                  Phone number
-                </h6>
-                <p class="card-text">
-                  <%= card.phone %><br>
-                </p>
-              </div>
-            <% end %>
-          </li>
-
-          <li class="list-group-item">
-            <% if card.email.present? %>
-              <div class="card-block">
-                <h6 class="card-title">
-                  Email
-                </h6>
-                <p class="card-text">
-                  <%= card.email %><br>
-                </p>
-              </div>
-            <% end %>
-          </li>
-        </ul>
-      <% end %>
+    <div id="cards-for-<%= customer.id %>"> 
+      <%= render 'contact_cards/contact_cards', contact_cards: customer.contact_cards %>
+    </div>
   </div>
 <% end %>
