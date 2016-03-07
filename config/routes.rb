@@ -27,6 +27,6 @@ Rails.application.routes.draw do
   end
 
   resources :customers, only: [] do
-    resources :contact_cards, only: [:new, :create]
+    resources :contact_cards, only: [:new, :create, :edit, :update]
   end
 end

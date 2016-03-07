@@ -1,0 +1,2 @@
+$("<%= "#contact_#{@contact_card.id}_card" %>")
+  .html('<%= j render "contact_cards/form", contact_card: @contact_card, customer: @customer %>');

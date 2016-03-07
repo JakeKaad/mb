@@ -1,21 +1,25 @@
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">
-    <div class="card-block">
-      <h6 class="card-title">
-        Address
-      </h6>
-      <p class="card-text">
-        <%= card.street_address %><br>
-        <% if card.address_second_line.present? %>
-          <%= card.address_second_line %><br>
-        <% end %>
-        <%= "#{card.city}, #{card.state} #{card.zip}" %>
-      </p>
-    </div>
-  </li>
+  <% if card.street_address.present? %>
+    <li class="list-group-item">
+      <div class="card-block">
+        <h6 class="card-title">
+          Address
+        </h6>
+        <p class="card-text">
+          <% if card.street_address.present? %>
+            <%= card.street_address %><br>
+            <% if card.address_second_line.present? %>
+              <%= card.address_second_line %><br>
+            <% end %>
+            <%= "#{card.city}, #{card.state} #{card.zip}" %>
+          <% end %>
+        </p>
+      </div>
+    </li>
+  <% end %>
 
-  <li class="list-group-item">
-    <% if card.phone.present? %>
+  <% if card.phone.present? %>
+    <li class="list-group-item">
       <div class="card-block">
         <h6 class="card-title">
           Phone number
@@ -24,11 +28,11 @@
           <%= card.phone %><br>
         </p>
       </div>
-    <% end %>
-  </li>
+    </li>
+  <% end %>
 
-  <li class="list-group-item">
-    <% if card.email.present? %>
+  <% if card.email.present? %>
+    <li class="list-group-item">
       <div class="card-block">
         <h6 class="card-title">
           Email
@@ -37,6 +41,13 @@
           <%= card.email %><br>
         </p>
       </div>
-    <% end %>
+    </li>
+  <% end %>
+
+  <li class="list-group-item">
+    <div class="card-block">
+      <%= link_to "Edit", edit_customer_contact_card_path(card.contactable, card), remote: true, class: "card-link" %>
+      <a href="#" class="card-link">Delete</a>
+    </div>
   </li>
 </ul>
