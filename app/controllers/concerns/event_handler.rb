@@ -15,7 +15,6 @@ module EventHandler
 
       private
 
-
       def find_info event
         @info = event.info
         @info ||= Info.new event: event
@@ -23,7 +22,7 @@ module EventHandler
     end
   end
 
-  def handle event
+  def event_details event
     @event_details ||= EventHandler.new event
   end
 end
