@@ -1,0 +1,9 @@
+<div class= "card-deck-wrapper">
+  <div class='card-deck'>
+    <% contact_cards.each do |card| %>
+      <div class="card">
+        <%= render 'contact_cards/contact_card', card: card %>
+      </div>
+    <% end %>
+  </div>
+</div>
