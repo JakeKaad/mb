@@ -137,6 +137,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    colored (1.2)
     concurrent-ruby (1.0.1)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
@@ -157,8 +158,14 @@ GEM
       railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
+    git-up (0.5.12)
+      colored (>= 1.2)
+      grit
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    grit (2.0.0)
+      diff-lcs (>= 1.1.2)
+      mime-types (>= 1.15)
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -303,6 +310,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails (~> 4.4.1)
   faker
+  git-up
   jbuilder (~> 2.0)
   jquery-rails
   launchy

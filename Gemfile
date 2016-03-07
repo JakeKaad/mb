@@ -41,6 +41,7 @@ group :development, :test do
   gem "rspec-mocks", git: "https://github.com/rspec/rspec-mocks.git", branch: "master"
   gem 'dotenv-rails'
   gem 'faker'
+  gem 'git-up'
 end
 
 group :development do
