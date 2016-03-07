@@ -29,7 +29,7 @@ class ContactCard < ActiveRecord::Base
   protected
 
   def only_one_main_per_contactable
-    return unless main?
+    return if main?
 
     if contactable_id.nil? || contactable_type.nil?
       errors.add(:contact_card, 'nobody is assigned to this card')

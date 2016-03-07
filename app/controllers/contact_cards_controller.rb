@@ -1,6 +1,6 @@
 class ContactCardsController < ApplicationController
   before_action :set_customer
-  before_action :set_contact_card, only: [:edit]
+  before_action :set_contact_card, only: [:edit, :update]
 
   def new
     authorize! :manage, @customer
@@ -32,6 +32,20 @@ class ContactCardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path, alert: "Not supported yet." }
       format.js {}
+    end
+  end
+
+  def update
+    if @contact_card.update(contact_card_params)
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: "Not supported yet." }
+        format.js {}
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: "Not supported yet." }
+        format.js { render :edit }
+      end
     end
   end
 
