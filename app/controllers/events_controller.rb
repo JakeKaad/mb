@@ -1,14 +1,14 @@
 class EventsController < ApplicationController
 
   include EventHandler
+  include ContactProcessor
   before_action :require_sign_in
   before_action :set_company
 
   def show
     @event = Event.find params[:id]
-
     authorize! :read, @event
-    handle @event
+    event_details @event
   end
 
   def new
@@ -22,11 +22,12 @@ class EventsController < ApplicationController
   def create
     @event = @company.events.new(event_params)
     authorize! :create, @event
-    @primary_contact = Customer.find_or_create_by(email: primary_contact_attributes["email"])  
-    @primary_contact.update(primary_contact_attributes)
-    @contact_card = @primary_contact.contact_cards.create(contact_card_params)
+    contact_processor = create_contact_processor
 
-    if @event.save && @event.add_primary?(@primary_contact)
+
+    if @event.save && contact_processor.add_primary_contact_to?(@event)
+      render_contact contact_processor
+
       redirect_to company_event_path(@company, @event), notice: "Event was added succesfully."
     else
       flash[:alert] =  "Something went wrong, event not created."
@@ -35,6 +36,13 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def create_contact_processor
+    cp = ContactProcessor.new(
+      customer_params: primary_contact_attributes,
+      contact_params: contact_card_params
+    )
+  end
 
   def set_company
     @company = Company.find params[:company_id]

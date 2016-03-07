@@ -36,11 +36,10 @@ class ContactCard < ActiveRecord::Base
       return
     end
 
-
     match = contactable.contact_cards.main_card
-  
+
     if persisted?
-      matches = matches.where('id != ?', id)
+      match = contactable.contact_cards.where('id != ?', id)
     end
 
     if match.present?
