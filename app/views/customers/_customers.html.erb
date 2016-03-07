@@ -5,10 +5,22 @@
       <h4 class="card-title">
         <%= "#{customer.first_name} #{customer.last_name}" %>
       </h4>
+      <p class="card-text">
       <% if customer == event.primary_contact %>
-        <p class="card-text">Primary Contact</p>
+        <p>Primary Contact</p>
       <% end %>
+
+        <%= link_to new_customer_contact_card_path(customer), remote: true do %>
+          <button class="btn btn-sm btn-primary">Add new contact card</button>
+        <% end %>
+      </p>
     </div>
+
+    <ul class="list-group list-group-flush">
+      <div id="new-contact-wrapper">
+
+      </div>
+    </ul>
 
 
       <% customer.contact_cards.each do |card| %>
@@ -27,6 +39,7 @@
               </p>
             </div>
           </li>
+
           <li class="list-group-item">
             <% if card.phone.present? %>
               <div class="card-block">
@@ -39,6 +52,7 @@
               </div>
             <% end %>
           </li>
+
           <li class="list-group-item">
             <% if card.email.present? %>
               <div class="card-block">
