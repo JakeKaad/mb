@@ -23,11 +23,8 @@ class EventsController < ApplicationController
     @event = @company.events.new(event_params)
     authorize! :create, @event
     contact_processor = create_contact_processor
-
-
     if @event.save && contact_processor.add_primary_contact_to?(@event)
       render_contact contact_processor
-
       redirect_to company_event_path(@company, @event), notice: "Event was added succesfully."
     else
       flash[:alert] =  "Something went wrong, event not created."

@@ -20,10 +20,10 @@
     <div class="col-md-2">
       <ul class="nav nav-pills nav-stacked">
         <li class="nav-item">
-          <%= link_to "Setup information", company_event_path(@company, @event), class: "nav-link #{"active" if params[:tab].nil?}" %>
+          <%= link_to "Setup information", company_event_path(@company, @event), class: "nav-link #{"active" if params[:event_tab].nil?}" %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contacts</a>
+          <%= link_to "Contacts", company_event_path(@company, @event, event_tab: "contacts"), class: "nav-link #{"active" if params[:event_tab] == "contacts"}" %>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Menu</a>
@@ -39,7 +39,11 @@
 
 
     <div class="col-md-8" id="event-display">
-      <%= render 'infos/info', event: @event, info: @event_details.info %>
+      <% if params[:event_tab].nil? %>
+        <%= render 'infos/info', event: @event, info: @event_details.info %>
+      <% elsif params[:event_tab] == "contacts" %>
+        <%= render 'customers/customers', event: @event, customers: @event_details.customers %>
+      <% end %>
     </div>
   </div>
 </div>

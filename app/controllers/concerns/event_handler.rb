@@ -13,6 +13,10 @@ module EventHandler
         @info ||= find_info event
       end
 
+      def customers
+        @customers ||= event.customers
+      end
+
       private
 
       def find_info event
