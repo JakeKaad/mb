@@ -7,7 +7,7 @@ class ContactCardsController < ApplicationController
     @contact_card = ContactCard.new
 
     respond_to do |format|
-      format.html { redirect_to root_path, alert: "Not supported yet." }
+      format.html { not_supported }
       format.js {}
     end
   end
@@ -17,12 +17,12 @@ class ContactCardsController < ApplicationController
     @contact_card = @customer.contact_cards.new(contact_card_params)
     if @contact_card.save
       respond_to do |format|
-        format.html { redirect_to root_path, alert: "Not supported yet." }
+        format.html { not_supported }
         format.js {}
       end
     else
       respond_to do |format|
-        format.html { redirect_to root_path, alert: "Not supported yet." }
+        format.html { not_supported }
         format.js { render :new }
       end
     end
@@ -30,7 +30,7 @@ class ContactCardsController < ApplicationController
 
   def edit
     respond_to do |format|
-      format.html { redirect_to root_path, alert: "Not supported yet." }
+      format.html { not_supported }
       format.js {}
     end
   end
@@ -38,12 +38,12 @@ class ContactCardsController < ApplicationController
   def update
     if @contact_card.update(contact_card_params)
       respond_to do |format|
-        format.html { redirect_to root_path, alert: "Not supported yet." }
+        format.html { not_supported }
         format.js {}
       end
     else
       respond_to do |format|
-        format.html { redirect_to root_path, alert: "Not supported yet." }
+        format.html { not_supported }
         format.js { render :edit }
       end
     end

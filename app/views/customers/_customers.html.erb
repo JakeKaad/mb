@@ -1,4 +1,4 @@
-<h2> Contacts </h2>
+<%= link_to "Add another customer to event", new_event_customer_path(event), class: "btn btn-success btn-sm" %>
 <% customers.each do |customer| %>
   <div class="card">
     <div class="card-block">
@@ -21,7 +21,7 @@
 
       </div>
     </ul>
-    <div id="cards-for-<%= customer.id %>"> 
+    <div id="cards-for-<%= customer.id %>">
       <%= render 'contact_cards/contact_cards', contact_cards: customer.contact_cards %>
     </div>
   </div>

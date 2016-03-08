@@ -42,6 +42,4 @@ feature "Company and meta information" do
     click_on "Add contact information"
     expect(page).to have_content "new_email@test.com"
   end
-
-
 end

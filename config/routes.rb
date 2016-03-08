@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :events, only: [] do
     resources :infos, only: [:create, :edit, :update]
+    resources :customers, only: [:new]
   end
 
   resources :infos, only: [] do
