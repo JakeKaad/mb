@@ -29,7 +29,7 @@ class ContactCard < ActiveRecord::Base
   protected
 
   def only_one_main_per_contactable
-    return if main?
+    return unless main?
 
     if contactable_id.nil? || contactable_type.nil?
       errors.add(:contact_card, 'nobody is assigned to this card')
@@ -37,12 +37,9 @@ class ContactCard < ActiveRecord::Base
     end
 
     match = contactable.contact_cards.main_card
-
-    if persisted?
-      match = contactable.contact_cards.where('id != ?', id)
-    end
-
-    if match.present?
+    if self == match
+      match = contactable.contact_cards.where('id != ? ', id)
+    else
       errors.add(:contact_card, 'cannot have more than one main contact card')
     end
   end
