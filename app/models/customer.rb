@@ -25,11 +25,13 @@ class Customer < ActiveRecord::Base
      main_card.phone
    end
 
-   private
-
    def main_card
      contact_cards.main_card
    end
+
+   private
+
+
 
 
 end
