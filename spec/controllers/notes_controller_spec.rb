@@ -126,4 +126,28 @@ describe NotesController do
       expect(response).to redirect_to company_event_path info.event.company, info.event
     end
   end
+
+  describe "GET new" do
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
+    let(:info) { create :info, event: event }
+    let(:user) { create :user }
+    let(:customer) { create :customer }
+
+    before do
+      login user
+      event.customers << customer
+    end
+
+    it "should set @notable as customer when its customer" do
+      get :new, customer_id: customer.id
+      expect(assigns(:notable)).to eq customer
+    end
+
+    it "should assign @note" do
+      get :new, customer_id: customer.id
+      expect(assigns(:note).new_record?).to be_truthy
+      expect(assigns(:note).class).to eq Note
+    end
+  end
 end
