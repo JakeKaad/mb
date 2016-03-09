@@ -1,1 +1,2 @@
-$("#event-display").html("<%= j render 'customers/form', event: @event, customer: @customer %>")
+$("#event-display")
+  .html("<%= j render 'customers/form', event: @event, customer: @customer, contact_card: @contact_card %>")

@@ -3,7 +3,7 @@ module ContactProcessor
 
   included do
     class ContactProcessor
-      attr_accessor :customer_params, :contact_params, :event, :email
+      attr_accessor :customer_params, :contact_params, :event, :email, :customer
 
       def initialize(customer_params: , contact_params: )
         @customer_params = customer_params
@@ -11,23 +11,32 @@ module ContactProcessor
         set_email
       end
 
-      def primary_contact
-        @primary_contact ||= Customer.find_or_create_by(email: email)
+      def customer
+        @customer ||= Customer.find_or_create_by(email: email)
       end
+      alias_method :primary_contact, :customer
 
       def main_card
-        @contact_card ||= primary_contact.contact_cards.find_or_create_by(email: email)
+        @contact_card ||= customer.contact_cards.find_or_create_by(email: email)
       end
 
       def add_primary_contact_to? event
         @event = event
-        primary_contact.update(customer_params)
+        customer.update(customer_params)
         main_card.update(contact_params)
-        event.add_primary? primary_contact
+        event.add_primary? customer
+      end
+
+      def add_customer_to? event
+        @event = event
+        customer.update(customer_params)
+        main_card.update(contact_params)
+        event.customers << customer
+        event.customers.include? customer
       end
 
       def all_valid?
-        primary_contact.valid? && main_card.valid? && event.valid?
+        customer.valid? && main_card.valid? && event.valid?
       end
 
       private
