@@ -1,0 +1,2 @@
+$("#<%= j "new-#{@notable.id}-note" %>").html
+  ("<%= j render "notes/form_remote", notable: @notable, note: @note, event: @event %>");

@@ -13,6 +13,7 @@ class Ability
       can :manage, Info
       can :manage, User
       can :manage, Document
+      can :manage, Customer
     when Customer
 
     end

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
       @current_ability ||= Ability.new(current_customer)
     else
-      
+
       @current_ability ||= Ability.new(current_user)
     end
   end
@@ -20,5 +20,9 @@ class ApplicationController < ActionController::Base
 
   def require_sign_in
     redirect_to new_user_session_path unless user_signed_in?
+  end
+
+  def not_supported
+    redirect_to root_path, alert: "Not supported yet."
   end
 end

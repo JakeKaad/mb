@@ -14,6 +14,7 @@ class Customer < ActiveRecord::Base
    has_and_belongs_to_many :events
 
    has_many :contact_cards, as: :contactable
+   has_many :notes, as: :notable
 
    ####################################
    ### Validations
@@ -25,11 +26,13 @@ class Customer < ActiveRecord::Base
      main_card.phone
    end
 
-   private
-
    def main_card
      contact_cards.main_card
    end
+
+   private
+
+
 
 
 end

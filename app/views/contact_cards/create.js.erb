@@ -1,0 +1,3 @@
+$("#<%= j "new-#{@customer.id}-card" %>").hide();
+
+$("#cards-for-<%= @customer.id %>").html("<%= j render 'contact_cards/contact_cards', contact_cards: @customer.contact_cards %>");

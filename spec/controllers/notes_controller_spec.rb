@@ -34,6 +34,36 @@ describe NotesController do
       end
     end
 
+    context "success - customer" do
+      let(:customer) { create :customer}
+
+      before do
+        login user
+        note_params[:event_id] = event.id
+        post :create, customer_id: customer.id, note: note_params
+      end
+
+      it "should create a note" do
+        expect(Note.all).to_not be_empty
+      end
+
+      it "should display a success message" do
+        expect(flash[:notice]).to_not be_empty
+      end
+
+      it "should redirect_to event show page" do
+        expect(response).to redirect_to company_event_path company, event
+      end
+
+      it "should assign @notable" do
+        expect(assigns(:notable)).to eq customer
+      end
+
+      it "should set the notable" do
+        expect(customer.notes).to_not be_empty
+      end
+    end
+
     context "failure - No message" do
       before do
         login user
@@ -94,7 +124,7 @@ describe NotesController do
     end
 
     it "should redirect back with an html" do
-      expect(response).to redirect_to company_event_path info.event.company, info.event
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -105,25 +135,100 @@ describe NotesController do
     let(:info) { create :info, event: event }
     let(:note) { create :note, notable: info, event: event }
 
-    before do
-      login user
-      post :update, info_id: info.id, id: note.id, note:  { message: "Updated notes" }
+
+    context "info note" do
+      before do
+        login user
+        post :update, info_id: info.id, id: note.id, note:  { message: "Updated notes" }
+      end
+
+      it "should assign @notable" do
+        expect(assigns(:notable)).to eq info
+      end
+
+      it "should assign @note" do
+        expect(assigns(:note)).to eq note
+      end
+
+      it "should update @note" do
+        expect(note.reload.message).to eq "Updated notes"
+      end
+
+      it "should redirect back with an html" do
+        expect(response).to redirect_to root_path
+      end
     end
 
-    it "should assign @notable" do
-      expect(assigns(:notable)).to eq info
+    context "customer note" do
+      let(:customer) { create :customer }
+
+      before do
+        login user
+        post :update, customer_id: customer.id, id: note.id, note:  { message: "Updated notes" }
+      end
+
+      it "should assign @notable" do
+        expect(assigns(:notable)).to eq customer
+      end
+
+      it "should assign @note" do
+        expect(assigns(:note)).to eq note
+      end
+
+      it "should update @note" do
+        expect(note.reload.message).to eq "Updated notes"
+      end
+
+      it "should redirect back with an html" do
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
+
+  describe "GET new" do
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
+    let(:info) { create :info, event: event }
+    let(:user) { create :user }
+    let(:customer) { create :customer }
+
+    before do
+      login user
+      event.customers << customer
+      get :new, customer_id: customer.id, event_id: event.id
+    end
+
+    it "should assign @event" do
+      expect(assigns(:event)).to eq event
+    end
+
+    it "should set @notable as customer when its customer" do
+      expect(assigns(:notable)).to eq customer
     end
 
     it "should assign @note" do
-      expect(assigns(:note)).to eq note
+      expect(assigns(:note).new_record?).to be_truthy
+      expect(assigns(:note).class).to eq Note
     end
+  end
 
-    it "should update @note" do
-      expect(note.reload.message).to eq "Updated notes"
-    end
+  describe "DELETE destroy" do
+    context "info" do
+      let(:company) { user.company }
+      let(:event) { create :event, company: company }
+      let(:info) { create :info, event: event }
+      let(:user) { create :user }
+      let(:note) { create :note, event: event, notable: info }
 
-    it "should redirect back with an html" do
-      expect(response).to redirect_to company_event_path info.event.company, info.event
+      before do
+        login user
+        request.env["HTTP_REFERER"] = root_path
+        delete :destroy, id: note.id
+      end
+
+      it "should destroy the note" do
+        expect(Note.all).to be_empty
+      end
     end
   end
 end

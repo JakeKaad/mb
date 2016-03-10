@@ -18,11 +18,19 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :events do
+  resources :events, only: [] do
     resources :infos, only: [:create, :edit, :update]
+    resources :customers, only: [:new, :create]
   end
 
-  resources :infos do
+  resources :infos, only: [] do
     resources :notes, only: [:create, :edit, :update]
   end
+
+  resources :customers, only: [] do
+    resources :contact_cards, only: [:new, :create, :edit, :update]
+    resources :notes, only: [:new, :create, :edit, :update]
+  end
+
+  resources :notes, only: [:destroy]
 end

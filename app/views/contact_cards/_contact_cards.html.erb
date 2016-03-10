@@ -1,0 +1,7 @@
+<% if contact_cards.size == 1 %>
+  <div id="<%= "contact_#{contact_cards.first.id}_card" %>">
+    <%= render 'contact_cards/contact_card', card: contact_cards.first %>
+  </div>
+<% else %>
+  <%= render 'contact_cards/multiple_cards', contact_cards: contact_cards.first(2) %>
+<% end %>

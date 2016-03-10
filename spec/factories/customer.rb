@@ -11,5 +11,6 @@ FactoryGirl.define do
     last_name "CUSTOMER"
     sequence(:email) { |n| "pc{#{n}}@test.com" }
     password "password"
+    contact_card
   end
 end

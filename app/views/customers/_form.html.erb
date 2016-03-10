@@ -1,0 +1,56 @@
+<h2> Add Customer </h2>
+<%= form_for [event, customer], remote: true do |f| %>
+  <div class="row">
+    <fieldset class="form-group col-md-6">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group col-md-6">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </fieldset>
+  </div>
+
+  <fieldset class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control" %>
+  </fieldset>
+    <%= f.hidden_field :password, value: SecureRandom.base64(24) %>
+
+  <%= f.fields_for contact_card do |form| %>
+
+    <fieldset class="form-group">
+      <%= form.label :phone %>
+      <%= form.phone_field :phone, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= form.label :street_address %>
+      <%= form.text_field :street_address, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= form.label :address_second_line %>
+      <%= form.text_field :address_second_line, class: "form-control" %>
+    </fieldset>
+
+    <div class="row">
+      <fieldset class="form-group col-md-6">
+        <%= form.label :city %>
+        <%= form.text_field :city, class: "form-control" %>
+      </fieldset>
+
+      <fieldset class="form-group col-md-3">
+        <%= form.label :state %>
+        <%= form.select :state, options_for_select(us_states),  {}, { class: "form-control" } %>
+      </fieldset>
+
+      <fieldset class="form-group col-md">
+        <%= form.label :zip %>
+        <%= form.text_field :zip, class: "form-control" %>
+      </fieldset>
+    </div>
+  <% end %>
+  <%= f.submit class: "btn btn-success" %>
+<% end %>

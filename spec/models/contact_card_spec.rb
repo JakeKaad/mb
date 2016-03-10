@@ -30,6 +30,11 @@ describe ContactCard do
       card.main = false
       expect(card.valid?).to be_truthy
     end
+
+    it "should allow main contact to be updated" do
+      card_two.update(email: "new_email@test.com")
+      expect(card.valid?).to be_truthy
+    end
   end
 
   describe "#assign_main" do

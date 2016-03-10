@@ -1,0 +1,4 @@
+$("#<%= j "new-#{@notable.id}-note" %>").html("");
+
+$("#notes-for<%= @notable.id %>")
+  .html("<%= j render 'notes/customer_notes', notes: @notable.notes, customer: @notable %>");

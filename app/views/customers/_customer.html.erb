@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-block">
+    <h4 class="card-title">
+      <%= "#{customer.first_name} #{customer.last_name}" %>
+    </h4>
+    <p class="card-text">
+    <% if customer == event.primary_contact %>
+      <p>Primary Contact</p>
+    <% end %>
+
+      <%= link_to new_customer_contact_card_path(customer), remote: true do %>
+        <button class="btn btn-sm btn-primary">Add new contact card</button>
+      <% end %>
+      <%= link_to new_customer_note_path(customer, event_id: event.id), remote: true do %>
+        <button class="btn btn-sm btn-info">Add note</button>
+      <% end %>
+    </p>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <div id="<%= "new-#{customer.id}-card" %>"></div>
+    <div id="<%= "new-#{customer.id}-note" %>"></div>
+  </ul>
+  <div id="cards-for-<%= customer.id %>">
+    <%= render 'contact_cards/contact_cards', contact_cards: customer.contact_cards %>
+  </div>
+
+  <div id="notes-for<%= customer.id %>">
+    <%= render 'notes/customer_notes', notes: customer.notes, customer: customer %>
+  </div>
+</div>

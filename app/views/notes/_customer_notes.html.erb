@@ -1,0 +1,7 @@
+<ul class="list-group list-group-flush">
+  <% customer.notes.each do |note| %>
+    <li class="list-group-item" id="note_<%= note.id %>_li"">
+      <%= render 'notes/customer_note', customer: customer, note: note %>
+    </li>
+  <% end %>
+</ul>

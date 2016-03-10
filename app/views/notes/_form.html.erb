@@ -4,7 +4,11 @@
     <%= f.text_area :message, class: "form-control" %>
   </div>
 
-  <%= f.hidden_field :event_id, value: notable.event.id %>
+  <% if notable.class == Info %>
+    <%= f.hidden_field :event_id, value: notable.event.id %>
+  <% elsif notable.class == Customer %>
+    <%= f.hidden_field :event_id, value: event.id %>
+  <% end %>
 
   <%= f.submit "Add note", class: "btn btn-sm btn-success" %>
 <% end %>

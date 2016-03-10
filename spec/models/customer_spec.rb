@@ -9,6 +9,7 @@ describe Customer do
   it { should have_and_belong_to_many(:events) }
 
   it { should have_many :contact_cards }
+  it { should have_many :notes }
 
   ####################################
   ### Validations

@@ -1,23 +1,17 @@
 <div>
-  <div class="row">
-    <div class="col-md-10 col-md-offset-2">
-      <H1> <%= @event.name %> </h1>
-      <h6> <%= @event.room.name %> </h6>
-      <h6> <%= @event.event_date %> </h6>
-
-      <div class="row">
-        <h6 class="col-md-2"> Primary Contact: </h6>
-        <span class= "col-md-8">
-          <%= "#{@event.primary_contact.first_name} #{@event.primary_contact.last_name}    |" %>
-           <%= "#{@event.primary_contact.phone}    |" %>
-           <%= @event.primary_contact.email %>
-        </span>
-      </div>
-    </div>
-  </div>
+  <h1 class="col-md-offset-2"> <%= @event.name %> </h1>
 
   <div class="row">
     <div class="col-md-2">
+      <h6> <%= @event.room.name %> </h6>
+      <h6> <%= @event.event_date %> </h6>
+      <h6> Primary Contact</h6>
+      <%= "#{@event.primary_contact.first_name} #{@event.primary_contact.last_name}" %><br>
+      <%= "#{@event.primary_contact.phone}" %><br>
+      <%= @event.primary_contact.email %>
+      <hr>
+
+
       <ul class="nav nav-pills nav-stacked">
         <li class="nav-item">
           <%= link_to "Setup information", company_event_path(@company, @event), class: "nav-link #{"active" if params[:event_tab].nil?}" %>
