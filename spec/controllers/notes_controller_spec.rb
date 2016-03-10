@@ -135,25 +135,53 @@ describe NotesController do
     let(:info) { create :info, event: event }
     let(:note) { create :note, notable: info, event: event }
 
-    before do
-      login user
-      post :update, info_id: info.id, id: note.id, note:  { message: "Updated notes" }
+
+    context "info note" do
+      before do
+        login user
+        post :update, info_id: info.id, id: note.id, note:  { message: "Updated notes" }
+      end
+
+      it "should assign @notable" do
+        expect(assigns(:notable)).to eq info
+      end
+
+      it "should assign @note" do
+        expect(assigns(:note)).to eq note
+      end
+
+      it "should update @note" do
+        expect(note.reload.message).to eq "Updated notes"
+      end
+
+      it "should redirect back with an html" do
+        expect(response).to redirect_to root_path
+      end
     end
 
-    it "should assign @notable" do
-      expect(assigns(:notable)).to eq info
-    end
+    context "customer note" do
+      let(:customer) { create :customer }
 
-    it "should assign @note" do
-      expect(assigns(:note)).to eq note
-    end
+      before do
+        login user
+        post :update, customer_id: customer.id, id: note.id, note:  { message: "Updated notes" }
+      end
 
-    it "should update @note" do
-      expect(note.reload.message).to eq "Updated notes"
-    end
+      it "should assign @notable" do
+        expect(assigns(:notable)).to eq customer
+      end
 
-    it "should redirect back with an html" do
-      expect(response).to redirect_to root_path
+      it "should assign @note" do
+        expect(assigns(:note)).to eq note
+      end
+
+      it "should update @note" do
+        expect(note.reload.message).to eq "Updated notes"
+      end
+
+      it "should redirect back with an html" do
+        expect(response).to redirect_to root_path
+      end
     end
   end
 
