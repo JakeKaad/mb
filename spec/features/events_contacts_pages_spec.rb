@@ -63,4 +63,21 @@ feature "Company and meta information" do
     end
     expect(page).to have_content "Something noteworthy"
   end
+
+  it "should let us add another customer", js: true do
+    visit company_event_path(company, event)
+    click_on "Contacts"
+    click_on "Add another customer to event"
+    fill_in "First name", with: "Johnny"
+    fill_in "Last name", with: "Appleseed"
+    fill_in "Email", with: "Johnny@trees.com"
+    fill_in "Phone", with: "5555555550"
+    fill_in "Street address", with: "123 E Main St."
+    fill_in "Address second line", with: "Ste 200"
+    fill_in "City", with: "portland"
+    select "Oregon", from: "State"
+    fill_in "Zip", with: "97214"
+    click_on "Create customer"
+    expect(page).to have_content "Johnny Appleseed"
+  end
 end
