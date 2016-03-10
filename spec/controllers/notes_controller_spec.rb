@@ -34,6 +34,36 @@ describe NotesController do
       end
     end
 
+    context "success - customer" do
+      let(:customer) { create :customer}
+
+      before do
+        login user
+        note_params[:event_id] = event.id
+        post :create, customer_id: customer.id, note: note_params
+      end
+
+      it "should create a note" do
+        expect(Note.all).to_not be_empty
+      end
+
+      it "should display a success message" do
+        expect(flash[:notice]).to_not be_empty
+      end
+
+      it "should redirect_to event show page" do
+        expect(response).to redirect_to company_event_path company, event
+      end
+
+      it "should assign @notable" do
+        expect(assigns(:notable)).to eq customer
+      end
+
+      it "should set the notable" do
+        expect(customer.notes).to_not be_empty
+      end
+    end
+
     context "failure - No message" do
       before do
         login user
@@ -94,7 +124,7 @@ describe NotesController do
     end
 
     it "should redirect back with an html" do
-      expect(response).to redirect_to company_event_path info.event.company, info.event
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -123,7 +153,7 @@ describe NotesController do
     end
 
     it "should redirect back with an html" do
-      expect(response).to redirect_to company_event_path info.event.company, info.event
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -137,15 +167,18 @@ describe NotesController do
     before do
       login user
       event.customers << customer
+      get :new, customer_id: customer.id, event_id: event.id
+    end
+
+    it "should assign @event" do
+      expect(assigns(:event)).to eq event
     end
 
     it "should set @notable as customer when its customer" do
-      get :new, customer_id: customer.id
       expect(assigns(:notable)).to eq customer
     end
 
     it "should assign @note" do
-      get :new, customer_id: customer.id
       expect(assigns(:note).new_record?).to be_truthy
       expect(assigns(:note).class).to eq Note
     end
