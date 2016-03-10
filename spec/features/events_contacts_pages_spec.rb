@@ -42,4 +42,25 @@ feature "Company and meta information" do
     click_on "Add contact information"
     expect(page).to have_content "new_email@test.com"
   end
+
+  it "should let us add a note", js: true do
+    visit company_event_path(company, event)
+    click_on "Contacts"
+    click_link "Add note"
+    fill_in "Message", with: "Something noteworthy"
+    click_on "Create note"
+    expect(page).to have_content "Something noteworthy"
+  end
+
+  it "should let us edit a note", js: true do
+    note = Note.create(event_id: event.id, notable: primary_contact, message: "Noteworthy")
+    visit company_event_path(company, event)
+    click_on "Contacts"
+    within "#note_#{note.id}_li" do
+      click_link "Edit"
+      fill_in "Message", with: "Something noteworthy"
+      click_on "Update note"
+    end
+    expect(page).to have_content "Something noteworthy"
+  end
 end
