@@ -1,7 +1,10 @@
 <%= note.message %>
 <div class="btn-group pull-right">
-  <button class="btn btn-danger bg-right">Delete</button>
   <%= link_to edit_info_note_path(info, note), remote: true do %>
-    <button class="btn btn-primary bg-right" id=<%="edit_#{note.id}_button"%>>Edit</button>
+    <button class="btn btn-primary btn-sm bg-right" id=<%="edit_#{note.id}_button"%>>Edit</button>
   <% end %>
+  <%= link_to 'Destroy',  note,  method: :delete, class: "btn btn-danger btn-sm bg-right", data: { confirm: 'Are you sure?' } %>
 </div>
+<small><i>
+  Created on <%= note.created_at.strftime("%m/%d/%y at %I:%M%p.") %>
+</i></small>

@@ -211,4 +211,24 @@ describe NotesController do
       expect(assigns(:note).class).to eq Note
     end
   end
+
+  describe "DELETE destroy" do
+    context "info" do
+      let(:company) { user.company }
+      let(:event) { create :event, company: company }
+      let(:info) { create :info, event: event }
+      let(:user) { create :user }
+      let(:note) { create :note, event: event, notable: info }
+
+      before do
+        login user
+        request.env["HTTP_REFERER"] = root_path
+        delete :destroy, id: note.id
+      end
+
+      it "should destroy the note" do
+        expect(Note.all).to be_empty
+      end
+    end
+  end
 end

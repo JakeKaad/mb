@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_action :require_sign_in
   before_action :ensure_event, only: [:create]
+  before_action :set_note, only: [:edit, :update, :destroy]
 
   def new
     @notable = set_notable
@@ -31,7 +32,6 @@ class NotesController < ApplicationController
 
   def edit
     @notable = set_notable
-    @note = Note.find params[:id]
     @event = @note.event
     authorize! :update, @event
     respond_to do |format|
@@ -42,7 +42,6 @@ class NotesController < ApplicationController
 
   def update
     @notable = set_notable
-    @note = Note.find params[:id]
     authorize! :update, @note.event
     @note.update(note_params)
 
@@ -52,8 +51,17 @@ class NotesController < ApplicationController
     end
   end
 
+  def destroy
+    @note.destroy
+    redirect_to :back, alert: "Note successfully deleted."
+  end
+
 
   private
+
+  def set_note
+    @note = Note.find params[:id]
+  end
 
   def note_params
     params.require(:note).permit(:event_id, :message)

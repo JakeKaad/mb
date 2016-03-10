@@ -31,4 +31,6 @@ Rails.application.routes.draw do
     resources :contact_cards, only: [:new, :create, :edit, :update]
     resources :notes, only: [:new, :create, :edit, :update]
   end
+
+  resources :notes, only: [:destroy]
 end
