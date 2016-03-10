@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :require_sign_in
-  before_action :ensure_notable, only: [:create]
+  before_action :ensure_event, only: [:create]
 
   def new
     @notable = set_notable
@@ -32,7 +32,8 @@ class NotesController < ApplicationController
   def edit
     @notable = set_notable
     @note = Note.find params[:id]
-    authorize! :update, @note.event
+    @event = @note.event
+    authorize! :update, @event
     respond_to do |format|
       format.js { }
       format.html { not_supported }
@@ -42,7 +43,7 @@ class NotesController < ApplicationController
   def update
     @notable = set_notable
     @note = Note.find params[:id]
-    authorize! :update, @note.notable.event
+    authorize! :update, @note.event
     @note.update(note_params)
 
     respond_to do |format|
@@ -66,7 +67,7 @@ class NotesController < ApplicationController
     end
   end
 
-  def ensure_notable
+  def ensure_event
     if params[:note][:event_id].nil?
       flash[:alert] = "No event known. Please report this to Admin."
       redirect_to root_path

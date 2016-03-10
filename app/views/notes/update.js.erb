@@ -1,1 +1,2 @@
-$("#note_<%= @note.id %>_li").html("<%= escape_javascript render 'notes/info_note', note: @note, info: @notable %>")
+$("#note_<%= @note.id %>_li")
+  .html('<%= escape_javascript render "notes/#{@notable.class.to_s.downcase}_note", note: @note, info: @notable, customer: @notable %>')
