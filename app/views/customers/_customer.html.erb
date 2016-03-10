@@ -26,12 +26,6 @@
   </div>
 
   <div id="notes-for<%= customer.id %>">
-    <ul class="list-group list-group-flush">
-      <% customer.notes.each do |note| %>
-        <li class="list-group-item">
-          <%= render 'notes/customer_note', customer: customer, note: note %>
-        </li>
-      <% end %>
-    </ul>
+    <%= render 'notes/customer_notes', notes: customer.notes, customer: customer %>
   </div>
 </div>
