@@ -6,6 +6,7 @@ class Menu < ActiveRecord::Base
 
   belongs_to :event
   has_many :menu_items
+  has_many :menu_options, through: :menu_items
 
   ####################################
   ### Validations

@@ -7,6 +7,7 @@ describe Menu do
 
   it { should belong_to :event }
   it { should have_many :menu_items }
+  it { should have_many(:menu_options).through :menu_items }
 
   ####################################
   ### Validations

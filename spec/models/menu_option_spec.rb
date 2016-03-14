@@ -6,6 +6,7 @@ describe MenuOption do
   ####################################
 
   it { should have_many :menu_items }
+  it { should have_many(:menus).through(:menu_items) }
 
   ####################################
   ### Validations
