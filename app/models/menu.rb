@@ -5,6 +5,7 @@ class Menu < ActiveRecord::Base
   ####################################
 
   belongs_to :event
+  has_many :menu_items
 
   ####################################
   ### Validations
@@ -15,5 +16,5 @@ class Menu < ActiveRecord::Base
   validates_presence_of :base_rate
   validates_presence_of :final_price
   validates_presence_of :event_id
-  
+
 end

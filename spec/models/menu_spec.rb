@@ -6,6 +6,7 @@ describe Menu do
   ####################################
 
   it { should belong_to :event }
+  it { should have_many :menu_items }
 
   ####################################
   ### Validations
