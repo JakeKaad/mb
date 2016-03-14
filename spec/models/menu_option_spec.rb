@@ -6,8 +6,10 @@ describe MenuOption do
   ####################################
 
   it { should have_many :menu_items }
-  
+
   ####################################
   ### Validations
   ####################################
+
+  it { should validate_presence_of :name }
 end

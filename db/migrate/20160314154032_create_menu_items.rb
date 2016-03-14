@@ -4,7 +4,7 @@ class CreateMenuItems < ActiveRecord::Migration[5.0]
       t.integer :menu_id, null: false
       t.integer :menu_option_id, null: false
       t.string :course
-      t.integer :price_adjustment, default: 0
+      t.float :price_adjustment, default: 0.0
       t.timestamps
     end
   end
