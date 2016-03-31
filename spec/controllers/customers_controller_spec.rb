@@ -13,7 +13,7 @@ describe CustomersController do
 
     before do
       login user
-      get :new, event_id: event.id
+      get :new, params: { event_id: event.id }
     end
 
     it "should set @event" do
@@ -44,7 +44,7 @@ describe CustomersController do
     before do
       login user
       event.customers << primary
-      post :create, event_id: event.id, customer: customer_with_nested_params(customer_params, card_params)
+      post :create, params: { event_id: event.id, customer: customer_with_nested_params(customer_params, card_params) }
     end
 
     it "should set @event" do

@@ -12,7 +12,7 @@ describe EventsController do
 
       before do
         login user
-        get :show, company_id: company.id, id: event.id
+        get :show, params: { company_id: company.id, id: event.id }
       end
 
       it "should assign @company" do
@@ -36,7 +36,7 @@ describe EventsController do
       context "with info created" do
         let!(:info) { create :info, event: event}
         it "should assign @info as the event's info record if it does exist" do
-          get :show, company_id: company.id, id: event.id
+          get :show, params: { company_id: company.id, id: event.id }
           expect(assigns(:event_details).info).to eq info.reload
         end
       end
@@ -50,7 +50,7 @@ describe EventsController do
 
       before do
         login user
-        get :new, company_id: company.id
+        get :new, params: { company_id: company.id }
       end
 
       it "should assign @company" do
@@ -77,8 +77,10 @@ describe EventsController do
 
       context "with valid inputs" do
         before do
-           post :create, company_id: company.id,
+           post :create, params: {
+             company_id: company.id,
              event: event_with_nested_attributes(event_params, customer_params, contact_params)
+           }
           end
 
         it "should assign @company" do
@@ -119,7 +121,9 @@ describe EventsController do
       context "with invalid inputs" do
         before do
           event_params[:name] = nil
-          post :create, company_id: company.id, event: event_with_nested_attributes(event_params, customer_params, contact_params)
+          post :create, params: {
+            company_id: company.id, event: event_with_nested_attributes(event_params, customer_params, contact_params)
+          }
         end
 
         it "should assign @company" do

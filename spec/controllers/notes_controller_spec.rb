@@ -14,7 +14,7 @@ describe NotesController do
       before do
         login user
         note_params[:event_id] = event.id
-        post :create, info_id: info.id, note: note_params
+        post :create, params: { info_id: info.id, note: note_params }
       end
 
       it "should create a note" do
@@ -40,7 +40,7 @@ describe NotesController do
       before do
         login user
         note_params[:event_id] = event.id
-        post :create, customer_id: customer.id, note: note_params
+        post :create, params: { customer_id: customer.id, note: note_params }
       end
 
       it "should create a note" do
@@ -67,7 +67,7 @@ describe NotesController do
     context "failure - No message" do
       before do
         login user
-        post :create, info_id: info.id, note: { event_id: event.id }
+        post :create, params: { info_id: info.id, note: { event_id: event.id } }
       end
 
       it "should redirect_to event show page" do
@@ -86,7 +86,7 @@ describe NotesController do
     context "failure- No event_id" do
       before do
         login user
-        post :create, info_id: info.id, note: note_params
+        post :create, params: { info_id: info.id, note: note_params }
       end
 
       it "shouldn't create a note with no event_id" do
@@ -112,7 +112,7 @@ describe NotesController do
 
     before do
       login user
-      get :edit, info_id: info.id, id: note.id
+      get :edit, params: { info_id: info.id, id: note.id }
     end
 
     it "should assign @notable" do
@@ -139,7 +139,7 @@ describe NotesController do
     context "info note" do
       before do
         login user
-        post :update, info_id: info.id, id: note.id, note:  { message: "Updated notes" }
+        post :update, params: { info_id: info.id, id: note.id, note:  { message: "Updated notes" } }
       end
 
       it "should assign @notable" do
@@ -164,7 +164,7 @@ describe NotesController do
 
       before do
         login user
-        post :update, customer_id: customer.id, id: note.id, note:  { message: "Updated notes" }
+        post :update, params: { customer_id: customer.id, id: note.id, note:  { message: "Updated notes" } }
       end
 
       it "should assign @notable" do
@@ -195,7 +195,7 @@ describe NotesController do
     before do
       login user
       event.customers << customer
-      get :new, customer_id: customer.id, event_id: event.id
+      get :new, params: { customer_id: customer.id, event_id: event.id }
     end
 
     it "should assign @event" do
@@ -223,7 +223,7 @@ describe NotesController do
       before do
         login user
         request.env["HTTP_REFERER"] = root_path
-        delete :destroy, id: note.id
+        delete :destroy, params: { id: note.id }
       end
 
       it "should destroy the note" do

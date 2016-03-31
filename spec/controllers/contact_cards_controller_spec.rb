@@ -7,16 +7,17 @@ describe ContactCardsController do
     let(:customer) { create :customer }
     let(:user) { create :user }
 
-    before { login user }
+    before do
+      login user
+      get :new, params: { customer_id: customer.id }
+    end
 
     it "should assign @customer" do
-      get :new, customer_id: customer.id
       expect(assigns(:customer)).to eq customer
     end
 
 
     it "should assign @contact_card" do
-      get :new, customer_id: customer.id
       expect(assigns(:contact_card).new_record?).to be_truthy
       expect(assigns(:contact_card).class).to eq ContactCard
     end
@@ -29,7 +30,7 @@ describe ContactCardsController do
 
     before do
       login user
-      post :create, customer_id: customer.id, contact_card: card_params
+      post :create, params: { customer_id: customer.id, contact_card: card_params }
     end
 
     it "should create a contact card" do
@@ -52,7 +53,7 @@ describe ContactCardsController do
 
     before do
       login user
-      get :edit, customer_id: customer.id, id: card.id
+      get :edit, params: { customer_id: customer.id, id: card.id }
     end
 
     it "should assign @customer" do
@@ -71,7 +72,7 @@ describe ContactCardsController do
 
     before do
       login user
-      post :update, customer_id: customer.id, id: card.id, contact_card: { email: "New@email.com" }
+      post :update, params: { customer_id: customer.id, id: card.id, contact_card: { email: "New@email.com" } }
     end
 
     it "should assign @customer" do
