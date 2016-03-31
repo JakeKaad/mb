@@ -40,6 +40,20 @@ describe EventsController do
           expect(assigns(:event_details).info).to eq info.reload
         end
       end
+
+      context "with no menu created" do
+        it "should assign @menu as a new record if it doesn't exist" do
+          expect(assigns(:event_details).menu.new_record?).to be_truthy
+        end
+      end
+
+      context "with no menu created" do
+        let!(:menu) { create :menu, event: event}
+        it "should assign @menu as the event's menu record if it does exist" do
+          get :show, params: { company_id: company.id, id: event.id }
+          expect(assigns(:event_details).menu).to eq menu.reload
+        end
+      end
     end
   end
 
