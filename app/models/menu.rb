@@ -18,4 +18,11 @@ class Menu < ActiveRecord::Base
   validates_presence_of :final_price
   validates_presence_of :event_id
 
+  before_validation :set_final_price
+
+  private
+
+  def set_final_price
+    self.final_price = self.base_rate if self.final_price.nil?
+  end
 end

@@ -1,0 +1,9 @@
+
+<% if menu.new_record? %>
+  <%= render 'menus/form', event: event, menu: menu %>
+<% else %>
+  <h6>Style <%= menu.service_style %></h6>
+  <h6>Rate type <%= menu.rate_type %></h6>
+  <h6>Base rate <%= menu.base_rate %></h6>
+  <h6>Final price <%= menu.final_price %></h6>
+<% end %>
