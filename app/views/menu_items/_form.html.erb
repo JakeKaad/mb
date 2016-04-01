@@ -1,0 +1,22 @@
+<div class="col-md-8">
+  <%= form_for [menu, menu_item] do |f| %>
+    <%= render 'layouts/errors', object: menu %>
+
+    <fieldset class="form-group">
+      <%= f.label :menu_option_id %>
+      <%= f.select :menu_option_id, options_for_select(MenuOption.all.map {|mo| [mo.name, mo.id, {'data-price' => mo.suggested_price_adjustment, 'data-course' => mo.suggested_course }]}) %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.label :course %>
+      <%= f.text_field :course, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.label :price_adjustment %>
+      <%= f.text_field :price_adjustment, class: "form-control" %>
+    </fieldset>
+    
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

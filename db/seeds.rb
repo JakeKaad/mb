@@ -33,4 +33,15 @@ n = 1
   n += 1
 end
 
+foods = %w(meatballs pizza chicken-strips crudite fruit-tray caesar-salad spinach-salad bread prime-rib potatoes)
+courses = %w(appetizer salad carving entree starch)
+foods.each do |food|
+  MenuOption.create(
+      name: food,
+      description: Faker::Lorem.sentence,
+      cuisine: Faker::Lorem.word,
+      suggested_course: courses.sample,
+      suggested_price_adjustment: (0..4).to_a.sample
+    )
+end
 company.users << user

@@ -33,5 +33,9 @@ Rails.application.routes.draw do
     resources :notes, only: [:new, :create, :edit, :update]
   end
 
+  resources :menus, only: [] do
+    resources :menu_items, only: [:create]
+  end
+
   resources :notes, only: [:destroy]
 end

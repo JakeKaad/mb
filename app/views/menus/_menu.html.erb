@@ -6,4 +6,12 @@
   <h6>Rate type <%= menu.rate_type %></h6>
   <h6>Base rate <%= menu.base_rate %></h6>
   <h6>Final price <%= menu.final_price %></h6>
+  <br>
+  <h4> Menu Items </h4>
+  <% menu.menu_items.each do |menu_item| %>
+    <%= menu_item.name %>
+    <%= menu_item.course %>
+    + $<%= menu_item.price_adjustment %>
+  <% end %>
+  <%= render 'menu_items/form', menu: menu, menu_item: menu.menu_items.new %>
 <% end %>
