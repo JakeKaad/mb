@@ -6,6 +6,7 @@ module MenuHelper
 
 
   def map_menu_options
+    [["Select option", ""]] + 
     MenuOption.all.map do |mo|
        [mo.name,
         mo.id, {
