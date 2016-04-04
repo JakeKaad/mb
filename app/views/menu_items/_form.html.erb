@@ -4,7 +4,7 @@
 
     <fieldset class="form-group">
       <%= f.label :menu_option_id %>
-      <%= f.select :menu_option_id, options_for_select(MenuOption.all.map {|mo| [mo.name, mo.id, {'data-price' => mo.suggested_price_adjustment, 'data-course' => mo.suggested_course }]}) %>
+      <%= menu_option_helper(f)%>
     </fieldset>
 
     <fieldset class="form-group">
