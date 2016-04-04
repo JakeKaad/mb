@@ -20,9 +20,15 @@ class Menu < ActiveRecord::Base
 
   before_validation :set_final_price
 
+  def increase_price price_adjustment
+    self.update(final_price: (price_adjustment + self.final_price))
+  end
+
   private
 
   def set_final_price
     self.final_price = self.base_rate if self.final_price.nil?
   end
+
+
 end

@@ -36,13 +36,17 @@ describe MenuItemsController do
       it "sets a notice" do
         expect(flash[:notice]).to_not be_empty
       end
+
+      it "increases the final price of the menu when added" do
+        expect(menu.reload.final_price - menu.base_rate).to eq option.suggested_price_adjustment
+      end
     end
   end
 
 
   context "invalid" do
     let(:menu) { create :menu }
-    let!(:menu_item) { create :menu_item, menu_option: option}
+    let!(:menu_item) { create :menu_item, menu_option: option, menu: menu}
     let(:option) { create :menu_option }
 
     before do
@@ -62,7 +66,7 @@ describe MenuItemsController do
     end
 
     it "doesn't create a menu_item" do
-      expect(MenuItem.count).to eq 0
+      expect(MenuItem.count).to eq 1
     end
 
     it "redirects back" do

@@ -4,6 +4,6 @@ FactoryGirl.define do
     service_style "Buffet"
     rate_type "Per person"
     base_rate 30
-    final_price 35
+    final_price 30
   end
 end

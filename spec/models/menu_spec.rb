@@ -31,4 +31,14 @@ describe Menu do
       menu.save
     end
   end
+
+  describe "#increase price" do
+    let(:menu) { create :menu, final_price: 30}
+    
+    before { menu.increase_price 3 }
+
+    it "should increase the price" do
+      expect(menu.final_price).to eq 33
+    end
+  end
 end

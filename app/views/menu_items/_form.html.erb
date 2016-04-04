@@ -16,7 +16,32 @@
       <%= f.label :price_adjustment %>
       <%= f.text_field :price_adjustment, class: "form-control" %>
     </fieldset>
-    
+
+    <div id="options_form_hidden">
+      <h5> New Menu Option </h5>
+      <%= f.fields_for MenuOption.new do |form| %>
+        <fieldset class="form-group">
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "form-control" %>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <%= form.label :cuisine %>
+          <%= form.text_field :cuisine, class: "form-control" %>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <%= form.label :suggested_course %>
+          <%= form.text_field :suggested_course, class: "form-control" %>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <%= form.label :suggested_price_adjustment %>
+          <%= form.text_field :suggested_price_adjustment, class: "form-control" %>
+        </fieldset>
+      <% end %>
+    </div>
+
     <%= f.submit class: "btn btn-primary" %>
   <% end %>
 </div>
