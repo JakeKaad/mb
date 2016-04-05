@@ -13,4 +13,9 @@ describe MenuOption do
   ####################################
 
   it { should validate_presence_of :name }
+  context "name uniqueness" do
+    let(:subject) { build :menu_option, name: "blah"}
+
+    it { should validate_uniqueness_of :name }
+  end
 end
