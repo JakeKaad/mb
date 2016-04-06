@@ -1,5 +1,6 @@
 class MenuItemsController < ApplicationController
   include MenuItemProcessor
+  
   before_action :set_menu
 
   def create
