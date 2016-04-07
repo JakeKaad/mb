@@ -13,7 +13,7 @@ describe InfosController do
     context "success" do
       before do
         login user
-        post :create, event_id: event.id, info: info_params
+        post :create, params: { event_id: event.id, info: info_params }
       end
 
       it "redirects to the events show page" do
@@ -52,7 +52,7 @@ describe InfosController do
     context "success" do
       before do
         login user
-        get :edit, event_id: event.id, id: info.id
+        get :edit, params: { event_id: event.id, id: info.id }
       end
 
       it "should set @event" do
@@ -78,7 +78,9 @@ describe InfosController do
     context "success" do
       before do
         login user
-        post :update, event_id: event.id, id: info.id, info: { napkin_colors: "PINK AND YELLOW"}
+        post :update, params: {
+          event_id: event.id, id: info.id, info: { napkin_colors: "PINK AND YELLOW"}
+        }
       end
 
       it "should set @event" do

@@ -1,0 +1,22 @@
+<div class="col-md-8">
+  <%= form_for [event, menu] do |f| %>
+    <%= render 'layouts/errors', object: menu %>
+
+    <fieldset class="form-group">
+      <%= f.label :service_style %>
+      <%= f.text_field :service_style, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.label :rate_type %>
+      <%= f.text_field :rate_type, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.label :base_rate %>
+      <%= f.text_field :base_rate, class: "form-control" %>
+    </fieldset>
+
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

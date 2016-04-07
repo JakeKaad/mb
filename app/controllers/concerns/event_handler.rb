@@ -17,11 +17,18 @@ module EventHandler
         @customers ||= event.customers
       end
 
+      def menu
+        @menu ||= find_menu event
+      end
+
       private
 
       def find_info event
-        @info = event.info
-        @info ||= Info.new event: event
+        @info = event.info || Info.new(event: event)
+      end
+
+      def find_menu event
+        @menu = event.menu || Menu.new(event: event)
       end
     end
   end

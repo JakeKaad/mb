@@ -17,10 +17,11 @@ class Event < ActiveRecord::Base
   has_one :primary_contact, through: :booking, class_name: "Customer", foreign_key: :customer_id
   accepts_nested_attributes_for :primary_contact
   ####################################
-  ### Event-information Relations
+  ### Event-meta Relations
   ####################################
 
   has_one :info
+  has_one :menu
 
   ####################################
   ### Validations

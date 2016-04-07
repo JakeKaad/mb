@@ -10,15 +10,16 @@ describe CompaniesController do
       let(:event_two) { create :event, company: company }
       let(:user) { create :user }
 
-      before { login user }
+      before do
+        login user
+        get :show, params: { id: company.id }
+      end
 
       it "should assign @company" do
-        get :show, id: company.id
         expect(assigns(:company)).to eq company
       end
 
       it "should assign @events" do
-        get :show, id: company.id
         expect(assigns(:events)).to eq [event_one, event_two]
       end
     end

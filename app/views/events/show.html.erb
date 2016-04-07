@@ -20,7 +20,7 @@
           <%= link_to "Contacts", company_event_path(@company, @event, event_tab: "contacts"), class: "nav-link #{"active" if params[:event_tab] == "contacts"}" %>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Menu</a>
+          <%= link_to "Menu", company_event_path(@company, @event, event_tab: "menu"), class: "nav-link #{"active" if params[:event_tab] == "menu"}" %>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Timeline</a>
@@ -37,6 +37,8 @@
         <%= render 'infos/info', event: @event, info: @event_details.info %>
       <% elsif params[:event_tab] == "contacts" %>
         <%= render 'customers/customers', event: @event, customers: @event_details.customers %>
+      <% elsif params[:event_tab] == "menu" %>
+        <%= render 'menus/menu', event: @event, menu: @event_details.menu %>
       <% end %>
     </div>
   </div>

@@ -1,0 +1,32 @@
+
+<% if menu.new_record? %>
+  <%= render 'menus/form', event: event, menu: menu %>
+<% else %>
+  <h6>Style <%= menu.service_style %></h6>
+  <h6>Rate type <%= menu.rate_type %></h6>
+  <h6>Base rate <%= menu.base_rate %></h6>
+  <h6>Final price <%= menu.final_price %></h6>
+  <br>
+  <h4> Menu Items </h4>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Dish</th>
+      <th>Course</th>
+      <th>Price Adjustment</th>
+      <th></th>
+    </tr>
+  </thead>
+    <% menu.menu_items.each do |menu_item| %>
+        <tr>
+          <td><%= menu_item.name %></td>
+          <td><%= menu_item.course %></td>
+          <td>$<%= number_with_precision(menu_item.price_adjustment, precision: 2) %></td>
+          <td>
+            <%= link_to "Remove item",  [menu, menu_item], method: :delete, data: { confirm: 'This will remove the menu item from the menu' } %>
+          </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= render 'menu_items/form', menu: menu, menu_item: menu.menu_items.new %>
+<% end %>

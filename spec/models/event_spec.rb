@@ -9,6 +9,7 @@ describe Event do
   it { should have_many :documents }
   it { should belong_to :room }
   it { should have_one :info }
+  it { should have_one :menu }
 
   it { should have_one(:booking) }
   it { should have_one(:primary_contact).through(:booking).class_name("Customer").with_foreign_key(:customer_id) }

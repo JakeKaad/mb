@@ -1,0 +1,47 @@
+<div class="col-md-8">
+  <%= form_for [menu, menu_item] do |f| %>
+    <%= render 'layouts/errors', object: menu %>
+
+    <fieldset class="form-group">
+      <%= f.label :menu_option_id %>
+      <%= menu_option_helper(f)%>
+    </fieldset>
+
+    <fieldset class="form-group" id="menu_item_course_group">
+      <%= f.label :course %>
+      <%= f.text_field :course, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group" id="menu_item_price_adjustment_group">
+      <%= f.label :price_adjustment %>
+      <%= f.text_field :price_adjustment, class: "form-control" %>
+    </fieldset>
+
+    <div id="options_form_hidden">
+      <h5> New Menu Option </h5>
+      <%= f.fields_for MenuOption.new do |form| %>
+        <fieldset class="form-group">
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "form-control" %>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <%= form.label :cuisine %>
+          <%= form.text_field :cuisine, class: "form-control" %>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <%= form.label :suggested_course %>
+          <%= form.text_field :suggested_course, class: "form-control" %>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <%= form.label :suggested_price_adjustment %>
+          <%= form.text_field :suggested_price_adjustment, class: "form-control" %>
+        </fieldset>
+      <% end %>
+    </div>
+
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+</div>

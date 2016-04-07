@@ -1,0 +1,47 @@
+Event 1->1 Menu HMT<->BT MenuItem BT<->HMT MenuOption
+
+Event
+  has one :menu
+
+Menu
+  belongs to :event
+  has many :menu_items
+  has many :menu_options, through: :menu_items
+
+MenuItem
+  Belongs to :menu
+  Belongs to :menu_option
+
+MenuOption
+  Has many :menu_items
+  has many :menus, through :menu_items
+
+Menu
+  Price Switch (Flat Rate vs Per Person rate/Flat Rate limits ServiceStyles)
+  Base Price (Class Constant? Company Setting?)
+  ServiceStyle (Family Style, Plated, Buffet, Heavy Apps (Adjusts Base Price accordingly))
+  Price Modifiers (Non-profit, Discounts, etc)
+  Final Price (per person/flat)
+
+MenuItem
+  Price Adjustment
+  Course (PassedApp/StationApp/Entree/Veg Entree/Veg side/Starch, etc) (This will depend on service style?)
+
+MenuOption
+  Name
+  Cuisine (Have predefined Cuisine types for filters, (American, Italian, Mexican, etc.))
+  SuggestedPriceAdjustment
+  SuggestedCourse (Entree/Veg Entree/Veg side/Starch, etc)
+  <!-- Maybe... HasMany CanBes (CanBe "App", CanBe "Entree") -->
+
+UI for editing a YML file or make this a AR class?
+Settings
+  CompanySettings
+    MenuSettings
+      BasePrice
+      ServiceStylePriceAdjustments
+        FamilyStyle
+        PlatedDinner
+        Buffet
+        HeavyApps
+        LightApps

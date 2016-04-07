@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :events, only: [] do
     resources :infos, only: [:create, :edit, :update]
     resources :customers, only: [:new, :create]
+    resources :menus, only: [:create]
   end
 
   resources :infos, only: [] do
@@ -30,6 +31,10 @@ Rails.application.routes.draw do
   resources :customers, only: [] do
     resources :contact_cards, only: [:new, :create, :edit, :update]
     resources :notes, only: [:new, :create, :edit, :update]
+  end
+
+  resources :menus, only: [] do
+    resources :menu_items, only: [:create, :destroy]
   end
 
   resources :notes, only: [:destroy]
