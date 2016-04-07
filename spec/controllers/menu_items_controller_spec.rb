@@ -156,4 +156,45 @@ describe MenuItemsController do
       expect(menu.reload.final_price).to eq build(:menu).final_price
     end
   end
+
+  describe "DELETE destroy" do
+    let(:menu) { create :menu }
+    let(:option) { create :menu_option }
+    let!(:menu_item) { create :menu_item, menu: menu, menu_option: option }
+    let(:action) { delete :destroy, params: { menu_id: menu.id, id: menu_item.id } }
+
+    before do
+      login
+    end
+
+
+    it "shouldn't destroy the  menu_option" do
+      expect(MenuOption.count).to eq 1
+      action
+      expect(MenuOption.count).to eq 1
+    end
+
+    it "should destroy the menu_item" do
+      expect(MenuItem.count).to eq 1
+      action
+      expect(MenuItem.count).to eq 0
+    end
+
+    it "redirects back" do
+      action
+      request.env["HTTP_REFERER"] = root_path
+      expect(response).to redirect_to root_path
+    end
+
+    it "sets an alert" do
+      action
+      expect(flash[:alert]).to_not be_empty
+    end
+
+    it "descreases the final price of the menu when added" do
+      action
+      option = MenuOption.first
+      expect(menu.base_rate - menu.reload.final_price ).to eq menu_item.price_adjustment
+    end
+  end
 end

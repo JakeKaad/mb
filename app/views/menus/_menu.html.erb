@@ -14,6 +14,7 @@
       <th>Dish</th>
       <th>Course</th>
       <th>Price Adjustment</th>
+      <th></th>
     </tr>
   </thead>
     <% menu.menu_items.each do |menu_item| %>
@@ -21,6 +22,9 @@
           <td><%= menu_item.name %></td>
           <td><%= menu_item.course %></td>
           <td>$<%= number_with_precision(menu_item.price_adjustment, precision: 2) %></td>
+          <td>
+            <%= link_to "Remove item",  [menu, menu_item], method: :delete, data: { confirm: 'This will remove the menu item from the menu' } %>
+          </td>
       </tr>
     <% end %>
   </table>

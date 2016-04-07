@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   resources :menus, only: [] do
-    resources :menu_items, only: [:create]
+    resources :menu_items, only: [:create, :destroy]
   end
 
   resources :notes, only: [:destroy]

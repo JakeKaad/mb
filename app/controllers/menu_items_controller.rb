@@ -1,6 +1,6 @@
 class MenuItemsController < ApplicationController
   include MenuItemProcessor
-  
+
   before_action :set_menu
 
   def create
@@ -13,6 +13,13 @@ class MenuItemsController < ApplicationController
     end
 
     redirect_back fallback_location: root_path
+  end
+
+  def destroy
+    @menu_item = MenuItem.find params[:id]
+    @menu_item.destroy
+    @menu.increase_price -@menu_item.price_adjustment
+    redirect_back fallback_location: root_path, alert: "#{@menu_item.name} removed from menu"
   end
 
   private
