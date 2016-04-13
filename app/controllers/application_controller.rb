@@ -8,10 +8,8 @@ class ApplicationController < ActionController::Base
 
   def current_ability
     if customer_signed_in?
-
       @current_ability ||= Ability.new(current_customer)
     else
-
       @current_ability ||= Ability.new(current_user)
     end
   end

@@ -29,6 +29,7 @@ module MenuItemProcessor
       end
 
       def create_menu_option
+        menu_option_params[:company_id] = @menu.event.company.id
         @menu_option = MenuOption.create(menu_option_params)
       end
 
