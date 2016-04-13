@@ -41,7 +41,7 @@ module MenuItemProcessor
       end
 
       def menu_option_params?
-        params[:menu_item][:menu_option][:name].present?
+        params[:menu_item][:menu_option].present? && params[:menu_item][:menu_option][:name].present?
       end
     end
   end
