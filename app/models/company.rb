@@ -8,6 +8,7 @@ class Company < ActiveRecord::Base
   has_many :events
   has_many :documents
   has_many :rooms
+  has_many :menu_options
 
   has_many :bookings
   has_many :booked_events, through: :bookings, class_name: "Event", foreign_key: "event_id"

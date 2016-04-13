@@ -16,6 +16,8 @@ Rails.application.routes.draw do
         post :create_with_documents
       end
     end
+
+    resources :menu_options, only: [:index]
   end
 
   resources :events, only: [] do

@@ -6,6 +6,9 @@
     <%= link_to "Add event", new_company_event_path(company, tab: "new-event"), class: "nav-link #{"active" if params[:tab] == "new-event"}" %>
   </li>
   <li class="nav-item">
+    <%= link_to "Menu options", company_menu_options_path(company, tab: "menu-options"), class: "nav-link #{"active" if params[:tab] == "menu-options"}" %>
+  </li>
+  <li class="nav-item">
     <%= link_to "Documents", company_documents_path(company, tab: "docs"), class: "nav-link #{"active" if params[:tab] == "docs"}" %>
   </li>
   <li class="nav-item">

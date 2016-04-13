@@ -10,9 +10,10 @@ describe Company do
   it { should have_many :documents }
   it { should have_many :rooms }
   it { should have_many :bookings }
+  it { should have_many :menu_options }
   it { should have_many(:primary_contacts).through(:bookings).class_name("Customer").with_foreign_key("primary_contact_id") }
   it { should have_many(:booked_events).through(:bookings).class_name("Event").with_foreign_key("booked_event_id") }
-  
+
   ####################################
   ### Validations
   ####################################

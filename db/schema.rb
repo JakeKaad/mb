@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314154733) do
+ActiveRecord::Schema.define(version: 20160413150936) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "company_id",  null: false
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 20160314154733) do
     t.string   "suggested_course"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.integer  "company_id",                 default: 0,   null: false
   end
 
   create_table "menus", force: :cascade do |t|

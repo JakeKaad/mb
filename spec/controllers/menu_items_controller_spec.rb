@@ -5,11 +5,14 @@ describe MenuItemsController do
 
   describe "POST create" do
     context "with existing menu option" do
-      let(:menu) { create :menu }
+      let(:user) { create :user }
+      let(:company) { user.company }
+      let(:event) { create :event, company: company }
+      let(:menu) { create :menu, event: event }
       let(:option) { create :menu_option }
 
       before do
-        login
+        login user
         post :create, params: {
                                 menu_id: menu.id,
                                 menu_item: {
@@ -44,12 +47,15 @@ describe MenuItemsController do
   end
 
   context "invalid" do
-    let(:menu) { create :menu }
+    let(:user) { create :user }
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
+    let(:menu) { create :menu, event: event }
     let!(:menu_item) { create :menu_item, menu_option: option, menu: menu}
     let(:option) { create :menu_option }
 
     before do
-      login
+      login user
       post :create, params: {
                               menu_id: menu.id,
                               menu_item: {
@@ -79,11 +85,14 @@ describe MenuItemsController do
   end
 
   context "valid menu option" do
-    let(:menu) { create :menu }
+    let(:user) { create :user }
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
+    let(:menu) { create :menu, event: event }
     let(:option_params) { attributes_for :menu_option }
 
     before do
-      login
+      login user
       post :create, params: {
                               menu_id: menu.id,
                               menu_item: { menu_option: option_params }
@@ -118,11 +127,14 @@ describe MenuItemsController do
   end
 
   context "invalid menu option" do
-    let(:menu) { create :menu }
+    let(:user) { create :user }
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
+    let(:menu) { create :menu, event: event }
     let(:option_params) { attributes_for :menu_option }
 
     before do
-      login
+      login user
       option_params[:name] = nil
       post :create, params: {
                               menu_id: menu.id,
@@ -158,13 +170,16 @@ describe MenuItemsController do
   end
 
   describe "DELETE destroy" do
-    let(:menu) { create :menu }
+    let(:user) { create :user }
+    let(:company) { user.company }
+    let(:event) { create :event, company: company }
+    let(:menu) { create :menu, event: event }
     let(:option) { create :menu_option }
     let!(:menu_item) { create :menu_item, menu: menu, menu_option: option }
     let(:action) { delete :destroy, params: { menu_id: menu.id, id: menu_item.id } }
 
     before do
-      login
+      login user
     end
 
 
