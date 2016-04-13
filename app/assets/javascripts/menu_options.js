@@ -1,4 +1,4 @@
-$(function() {
+$(document).on("turbolinks:load", function() {
   $("#menu_item_menu_option_id").change(function() {
     if(this.value === "new") {
       $("#options_form_hidden").css("display", "block");
