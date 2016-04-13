@@ -2,6 +2,7 @@ class MenusController < ApplicationController
   before_action :set_event
 
   def create
+    authorize! :manage, @event
     @menu = Menu.new(event: @event)
     if @menu.update(menu_params)
       flash[:notice] = "Menu info added to #{@event.name}."

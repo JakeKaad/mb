@@ -4,6 +4,7 @@ class MenuItemsController < ApplicationController
   before_action :set_menu
 
   def create
+    authorize! :manage, @menu.event
     process_menu_item @menu, params
     if @menu_item.save
       @menu.increase_price @menu_item.price_adjustment
@@ -16,6 +17,7 @@ class MenuItemsController < ApplicationController
   end
 
   def destroy
+    authorize! :manage, @menu.event
     @menu_item = MenuItem.find params[:id]
     @menu_item.destroy
     @menu.increase_price -@menu_item.price_adjustment
